@@ -1,0 +1,49 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.container {
+  text-align: center;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #333;
+}
+
+.status {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 30px;
+}
+
+.calendar-preview {
+  display: flex;
+  justify-content: center;
+}
+
+.day {
+  background-color: #eee;
+  padding: 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  width: 80px;
+}
+
+.date {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.event {
+  font-size: 12px;
+}
