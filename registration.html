@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Campus Event Calendar - Sign Up</title>
+  <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+  <div class="container">
+    <h1>Sign Up for Campus Events</h1>
+    <p>Create a profile to personalize your event notifications.</p>
+
+    <form action="/submit_registration" method="post">
+      <label for="studentID">Student ID:*</label><br>
+      <input type="text" id="studentID" name="studentID" required><br><br>
+
+      <label for="firstName">First Name:*</label><br>
+      <input type="text" id="firstName" name="firstName" required><br><br>
+
+      <label for="lastName">Last Name:*</label><br>
+      <input type="text" id="lastName" name="lastName" required><br><br>
+
+      <label for="email">Email Address:*</label><br>
+      <input type="email" id="email" name="email" required><br><br>
+
+      <label for="major">Major/Department:</label><br>
+      <input type="text" id="major" name="major"><br><br>
+
+      <label for="year">Year of Study:</label><br>
+      <input type="text" id="year" name="year"><br><br>
+
+      <h3>Notification Preferences</h3>
+      <input type="checkbox" id="allEvents" name="notifications" value="all">
+      <label for="allEvents"> All campus events</label><br>
+
+      <input type="checkbox" id="categoryEvents" name="notifications" value="category">
+      <label for="categoryEvents"> Events from specific categories</label><br>
+
+      <input type="checkbox" id="majorEvents" name="notifications" value="major">
+      <label for="majorEvents"> Events from my major/department</label><br><br>
+
+      <input type="submit" value="Create Profile" class="create-profile-link">
+    </form>
+  </div>
+</body>
+</html>
