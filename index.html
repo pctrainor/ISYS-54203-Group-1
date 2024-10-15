@@ -1,31 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Campus Event Calendar</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Event Calendar - Index</title>
+    <link rel="stylesheet" href="Style/style.css">
+    <style>
+        body {
+            background-color: white;
+        }
+        header {
+            background-color: #003366;
+        }
+        h1 {
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Campus Event Calendar</h1>
-        <p>Stay updated on all the exciting events happening on campus!</p>
-        <p class="status">Currently in Sprint 1 - Building the foundation</p>
-        <a href="registration.html" class="create-profile-link">Sign Up for Pre-Release Profile</a>
-        <a href="login.html" class="login-user">Login</a>
-        <div class="calendar-preview">
-            <div class="day">
-                <div class="date">15</div>
-                <div class="event">Movie Night</div>
+    <header>
+        <h1>Welcome to the Campus Event Calendar</h1>
+    </header>
+    
+    <main>
+        <h2>App Navigation</h2>
+        <section class="page-links">
+            <a href="Home.html" class="page-link">Home</a>
+            <a href="Login.html" class="page-link">Login</a>
+            <a href="Registration.html" class="page-link">Register</a>
+            <a href="UnderConstruction.html" class="page-link">Under Construction</a>
+        </section>
+
+        <p>Explore upcoming events, register, or log in to your account to stay updated on all campus activities.</p>
+        
+        <h2>Upcoming Events</h2>
+        <div class="events">
+            <div class="event">
+                <div class="event-date">15</div>
+                <p>Movie Night</p>
             </div>
-            <div class="day">
-                <div class="date">22</div>
-                <div class="event">Guest Lecture</div>
+            <div class="event">
+                <div class="event-date">22</div>
+                <p>Guest Lecture</p>
             </div>
-            <div class="day">
-                <div class="date">29</div>
-                <div class="event">Hackathon</div>
+            <div class="event">
+                <div class="event-date">29</div>
+                <p>Hackathon</p>
             </div>
         </div>
-    </div>
-    <script src="script.js"></script>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Campus Event Calendar. All rights reserved.</p>
+    </footer>
 </body>
 </html>
