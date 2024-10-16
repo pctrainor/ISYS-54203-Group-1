@@ -9,7 +9,7 @@
     <h1>Sign Up for Campus Events</h1>
     <p>Create a profile to personalize your event notifications.</p>
 
-    <form action="/submit_registration" method="post">
+    <form action="" method="post" onsubmit="displayResult(event)">
       <label for="studentID">Student ID:*</label><br>
       <input type="text" id="studentID" name="studentID" required><br><br>
 
@@ -40,6 +40,47 @@
 
       <input type="submit" value="Create Profile" class="create-profile-link">
     </form>
+
+    <div id="result" style="display: none;"> 
+      <h2>Profile Summary</h2>
+    </div>
   </div>
+
+  # Display results when form submitted. This will later be used to submit registration parameters to the database.
+  <script>
+    function displayResult(event) {
+      event.preventDefault(); 
+
+      const studentID = document.getElementById("studentID").value;
+      const firstName = document.getElementById("firstName").value;
+      const lastName = document.getElementById("lastName").value;
+      const email = document.getElementById("email").value;
+      const major = document.getElementById("major").value;
+      const year = document.getElementById("year").value;
+
+      let notificationPrefs = [];
+      if (document.getElementById("allEvents").checked) {
+        notificationPrefs.push("All campus events");
+      }
+      if (document.getElementById("categoryEvents").checked) {
+        notificationPrefs.push("Events from specific categories");
+      }
+      if (document.getElementById("majorEvents").checked) {
+        notificationPrefs.push("Events from my major/department");
+      }
+
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = `
+        <h2>Profile Summary</h2>
+        <p><strong>Student ID:</strong> ${studentID}</p>
+        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Major/Department:</strong> ${major}</p>
+        <p><strong>Year of Study:</strong> ${year}</p>
+        <p><strong>Notification Preferences:</strong> ${notificationPrefs.join(", ")}</p>
+      `;
+      resultDiv.style.display = "block"; 
+    }
+  </script>
 </body>
 </html>
