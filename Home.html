@@ -1,63 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- The head section contains metadata and links to external resources -->
 <head>
+    <!-- This sets the character encoding for the document to UTF-8 -->
     <meta charset="UTF-8">
+    <!-- This makes sure the webpage is responsive and adjusts to different screen sizes -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- The title of the webpage, displayed in the browser tab -->
     <title>Home - Campus Event Calendar</title>
-    <!-- Link to the CSS file for styling -->
+    <!-- Link to an external CSS file for styling the webpage -->
     <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
-    <!-- Header section with site title and navigation -->
+    <!-- The header section of the webpage -->
     <header>
+        <!-- Main heading of the webpage -->
         <h1>Campus Event Calendar</h1>
+        <!-- A brief description or tagline for the webpage -->
         <p>Stay updated on all the exciting events happening on campus!</p>
-
     </header>
     
-    <!-- Main content area -->
+    <!-- Main content area of the webpage -->
     <main class="container">
-        <!-- Search section -->
+        <!-- This section contains the search bar -->
         <section id="search">
-            <input type="text" id="search-input" placeholder="Search for events..." aria-label="Search">
-            <button id="search-button">Search</button>
+            <!-- Form that allows users to search for events, sending the query to SearchResults.html -->
+            <form action="SearchResults.html" method="get">
+                <!-- Container for the search input and button -->
+                <div class="search-container">
+                    <!-- Text input for users to type their search query -->
+                    <input type="text" id="search-input" name="query" placeholder="Search for events..." aria-label="Search">
+                    <!-- Button to submit the search form -->
+                    <button id="search-button">Search</button>
+                </div>
+            </form>
         </section>
         
-        <!-- Upcoming events section -->
+        <!-- This section will display upcoming events -->
         <section id="upcoming-events">
+            <!-- Heading for the upcoming events section -->
             <h2>Upcoming Events</h2>
-            <!-- Event list will be populated by JavaScript -->
-            <div class="event-list" id="event-list">
-                <!-- Event cards will be dynamically added here -->
-            </div>
+            <!-- Placeholder for event cards that will be added by JavaScript -->
+            <div class="event-list" id="event-list"></div>
         </section>
         
-        <!-- Popular categories section -->
+        <!-- This section shows popular event categories -->
         <section id="popular-categories">
+            <!-- Heading for the popular categories section -->
             <h2>Popular Event Categories</h2>
+            <!-- Container for category links -->
             <div class="categories">
-                <!-- Category links -->
-                <!-- Each link now points to EventsByCategory.html with a 'category' parameter -->
-                <!-- The 'category' parameter in the URL tells EventsByCategory.html which category to display -->
-                
-                <!-- Music category link -->
+                <!-- Link to the Music category page with a background color -->
                 <a href="EventsByCategory.html?category=Music" class="category" style="background-color: #f0a;">
                     <p>Music</p>
                 </a>
-                
-                <!-- Arts category link -->
+                <!-- Link to the Arts category page with a background color -->
                 <a href="EventsByCategory.html?category=Arts" class="category" style="background-color: #0af;">
                     <p>Arts</p>
                 </a>
-                
-                <!-- Sports category link -->
+                <!-- Link to the Sports category page with a background color -->
                 <a href="EventsByCategory.html?category=Sports" class="category" style="background-color: #fa0;">
                     <p>Sports</p>
                 </a>
-                <!-- You can add more categories here following the same pattern -->
-                <!-- For example: -->
-                <!-- Academic category link -->
+                <!-- Link to the Academic category page with a background color -->
                 <a href="EventsByCategory.html?category=Academic" class="category" style="background-color: #0f0;">
                     <p>Academic</p>
                 </a>
@@ -65,12 +69,13 @@
         </section>
     </main>
     
-    <!-- Footer section -->
+    <!-- Footer section of the webpage -->
     <footer>
+        <!-- Copyright notice -->
         <p>&copy; 2023 Campus Event Calendar</p>
     </footer>
     
-    <!-- Link to the JavaScript file for functionality -->
+    <!-- Link to the JavaScript file that adds functionality to the page -->
     <script src="script.js"></script>
 </body>
 </html>
