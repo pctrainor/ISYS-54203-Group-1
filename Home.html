@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- The head section contains metadata and links to external resources -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Campus Event Calendar</title>
-    <link rel="stylesheet" href="Style/home.css">
+    <!-- Link to the CSS file for styling -->
+    <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
-    <!-- Header section -->
+    <!-- Header section with site title and navigation -->
     <header>
         <h1>Campus Event Calendar</h1>
         <p>Stay updated on all the exciting events happening on campus!</p>
+
     </header>
-    <main>
+    
+    <!-- Main content area -->
+    <main class="container">
         <!-- Search section -->
         <section id="search">
-            <input type="text" placeholder="Search for events..." aria-label="Search">
-            <button>Search</button>
+            <input type="text" id="search-input" placeholder="Search for events..." aria-label="Search">
+            <button id="search-button">Search</button>
         </section>
         
         <!-- Upcoming events section -->
         <section id="upcoming-events">
             <h2>Upcoming Events</h2>
-            <div class="event-list">
-                <!-- Event card example -->
-                <div class="event">
-                    <h3>Movie Night</h3>
-                    <p>Date: 15th October 2023</p>
-                    <p>Time: 7:00 PM</p>
-                    <p>Description: Join us for an outdoor movie night!</p>
-                </div>
-                <!-- Add more events here -->
+            <!-- Event list will be populated by JavaScript -->
+            <div class="event-list" id="event-list">
+                <!-- Event cards will be dynamically added here -->
             </div>
         </section>
         
@@ -38,17 +37,30 @@
         <section id="popular-categories">
             <h2>Popular Event Categories</h2>
             <div class="categories">
-                <!-- Category examples -->
-                <div class="category" style="background-color: #f0a">
+                <!-- Category links -->
+                <!-- Each link now points to EventsByCategory.html with a 'category' parameter -->
+                <!-- The 'category' parameter in the URL tells EventsByCategory.html which category to display -->
+                
+                <!-- Music category link -->
+                <a href="EventsByCategory.html?category=Music" class="category" style="background-color: #f0a;">
                     <p>Music</p>
-                </div>
-                <div class="category" style="background-color: #0af">
+                </a>
+                
+                <!-- Arts category link -->
+                <a href="EventsByCategory.html?category=Arts" class="category" style="background-color: #0af;">
                     <p>Arts</p>
-                </div>
-                <div class="category" style="background-color: #fa0">
+                </a>
+                
+                <!-- Sports category link -->
+                <a href="EventsByCategory.html?category=Sports" class="category" style="background-color: #fa0;">
                     <p>Sports</p>
-                </div>
-                <!-- Add more categories here -->
+                </a>
+                <!-- You can add more categories here following the same pattern -->
+                <!-- For example: -->
+                <!-- Academic category link -->
+                <a href="EventsByCategory.html?category=Academic" class="category" style="background-color: #0f0;">
+                    <p>Academic</p>
+                </a>
             </div>
         </section>
     </main>
@@ -58,7 +70,7 @@
         <p>&copy; 2023 Campus Event Calendar</p>
     </footer>
     
-    <!-- Link to JavaScript file -->
+    <!-- Link to the JavaScript file for functionality -->
     <script src="script.js"></script>
 </body>
 </html>

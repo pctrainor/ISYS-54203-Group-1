@@ -6,40 +6,61 @@
     <title>Campus Event Calendar - Index</title>
     <link rel="stylesheet" href="Style/style.css">
     <style>
-        /* Inline styles for basic page setup */
-        body {
-            background-color: white;
+        /* These styles are specific to this page */
+        .content-wrapper {
+            max-width: 800px; /* This limits how wide the content can be */
+            margin: 0 auto; /* This centers the content on the page */
+            padding: 20px; /* This adds some space around the content */
         }
-        header {
-            background-color: #003366;
+        .nav-buttons {
+            list-style-type: none; /* This removes the bullet points from the list */
+            padding: 0;
+            margin: 20px 0;
         }
-        h1 {
-            color: white;
+        .nav-buttons button {
+            width: 100%; /* This makes the buttons full width */
+            padding: 15px 20px;
+            background-color: #f0f0f0; /* Light gray background for buttons */
+            color: #333; /* Dark gray text color */
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: left;
+            margin-bottom: 1px; /* Small gap between buttons */
+            transition: background-color 0.3s; /* Smooth color change when hovering */
         }
+        .nav-buttons button:hover {
+            background-color: #e0e0e0; /* Slightly darker when you hover over a button */
+        }
+
     </style>
 </head>
 <body>
-    <!-- Header section -->
+    <!-- This is the top part of the page with the main title -->
     <header>
         <h1>Welcome to the Campus Event Calendar</h1>
     </header>
     
-    <main>
-        <!-- Navigation section -->
+    <!-- This is the main content of the page -->
+    <main class="content-wrapper">
         <h2>App Navigation</h2>
-        <section class="page-links">
-            <a href="Home.html" class="page-link">Home</a>
-            <a href="Login.html" class="page-link">Login</a>
-            <a href="Registration.html" class="page-link">Register</a>
-            <a href="UnderConstruction.html" class="page-link">Under Construction</a>
-        </section>
+        <!-- This section contains the navigation buttons -->
+        <nav>
+            <ul class="nav-buttons">
+                <li><button onclick="location.href='Home.html'">Home</button></li>
+                <li><button onclick="location.href='Login.html'">Login</button></li>
+                <li><button onclick="location.href='Registration.html'">Register</button></li>
+                <li><button onclick="location.href='UnderConstruction.html'">Under Construction</button></li>
+            </ul>
+        </nav>
 
+        <!-- This is a brief description of what users can do on the site -->
         <p>Explore upcoming events, register, or log in to your account to stay updated on all campus activities.</p>
         
-        <!-- Upcoming events preview section -->
+        <!-- This section shows a preview of upcoming events -->
         <h2>Upcoming Events</h2>
         <div class="events">
-            <!-- Event preview cards -->
+            <!-- Each of these divs represents a single event -->
             <div class="event">
                 <div class="event-date">15</div>
                 <p>Movie Night</p>
@@ -55,7 +76,7 @@
         </div>
     </main>
     
-    <!-- Footer section -->
+    <!-- This is the bottom part of the page with copyright information -->
     <footer>
         <p>&copy; 2023 Campus Event Calendar. All rights reserved.</p>
     </footer>
