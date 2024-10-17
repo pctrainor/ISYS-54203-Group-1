@@ -82,8 +82,6 @@ days.forEach(day => {
         day.style.backgroundColor = '#eee';
     });
 });
-<<<<<<< Updated upstream
-=======
 
 //login.js
 // Add event listener to the form
@@ -109,4 +107,3 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         alert('Login successful!'); // Replace with actual login logic
     }
 });
->>>>>>> Stashed changes

@@ -158,7 +158,7 @@ a:hover {
   text-decoration: underline;
 }
 .error-message {
-  color: red;        /* Red text for error messages */
-  margin-top: 10px;  /* Space between the form and error message */
-  display: none;     /* Hidden by default */
+  color: rgb(255, 0, 0) !important;  /* Force red color */
+  margin-top: 10px;
+  display: none;
 }
