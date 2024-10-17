@@ -1,8 +1,8 @@
 // Sample data for upcoming events
 const events = [
-    { title: "Music Concert", date: "2023-11-20", time: "18:00", description: "Enjoy a night of classical music.", link: "EventDetails.html?event=1" },
-    { title: "Art Exhibition", date: "2023-11-22", time: "10:00", description: "Explore modern art pieces.", link: "EventDetails.html?event=2" },
-    { title: "Basketball Game", date: "2023-11-25", time: "15:00", description: "Watch the campus teams compete.", link: "EventDetails.html?event=3" },
+    { title: "Music Concert", date: "2023-11-20", time: "18:00", description: "Enjoy a night of classical music.", location: "University Auditorium" },
+    { title: "Art Exhibition", date: "2023-11-22", time: "10:00", description: "Explore modern art pieces.", location: "Art Gallery" },
+    { title: "Basketball Game", date: "2023-11-25", time: "15:00", description: "Watch the campus teams compete.", location: "Sports Complex" },
 ];
 
 // Function to display upcoming events
@@ -31,7 +31,9 @@ function displayUpcomingEvents() {
         `;
         // Make the entire event card clickable
         eventCard.addEventListener('click', () => {
-            window.location.href = event.link;
+            // Construct URL with event details as query parameters
+            const url = `EventDetails.html?title=${encodeURIComponent(event.title)}&date=${encodeURIComponent(event.date)}&time=${encodeURIComponent(event.time)}&location=${encodeURIComponent(event.location)}`;
+            window.location.href = url;
         });
 
         // Append the event card to the event list container
