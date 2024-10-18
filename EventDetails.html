@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic HTML document setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <!-- Link to the external CSS file for consistent styling -->
+    <link rel="stylesheet" href="Style/style.css">
+</head>
+<body>
+    <!-- Header section for the page -->
+    <header>
+        <h1>Campus Event Calendar</h1>
+        <p>Discover all the details about our exciting events!</p>
+    </header>
+
+    <!-- Main container for the event details page -->
+    <div class="container">
+        <!-- Section for displaying key event details -->
+        <section id="event-details">
+            <!-- Placeholder for event name, dynamically filled by JavaScript -->
+            <h1 id="event-name"></h1>
+            <!-- Placeholder for event date, dynamically filled by JavaScript -->
+            <p id="event-date"></p>
+            <!-- Placeholder for event time, dynamically filled by JavaScript -->
+            <p id="event-time"></p>
+            <!-- Placeholder for event location, dynamically filled by JavaScript -->
+            <p id="event-location"></p>
+        </section>
+        <!-- Additional section for more event information if needed -->
+        <section id="additional-info">
+            <h2>Event Details</h2>
+            <p>More detailed information about the event can be added here.</p>
+        </section>
+    </div>
+
+    <!-- Footer section for the page -->
+    <footer>
+        <p>&copy; 2023 Campus Event Calendar</p>
+    </footer>
+
+    <!-- Inline JavaScript to dynamically populate event details -->
+    <script>
+        // Function to get URL parameters
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const vars = queryString.split("&");
+            vars.forEach((param) => {
+                const pair = param.split("=");
+                params[pair[0]] = decodeURIComponent(pair[1]);
+            });
+            return params;
+        }
+
+        // Display event details from URL parameters
+        window.onload = function() {
+            const params = getQueryParams();
+            // Update HTML elements with event details from the URL
+            document.getElementById('event-name').textContent = params.title || "Event Name";
+            document.getElementById('event-date').textContent = `Date: ${params.date || "Event Date"}`;
+            document.getElementById('event-time').textContent = `Time: ${params.time || "Event Time"}`;
+            document.getElementById('event-location').textContent = `Location: ${params.location || "Event Location"}`;
+        };
+    </script>
+</body>
+</html>
