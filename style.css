@@ -162,10 +162,3 @@ a:hover {
   margin-top: 10px;  /* Space between the form and error message */
   display: none;     /* Hidden by default */
 }
-
-/* Basic styling for the events sharing */
-.event {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-}
