@@ -286,3 +286,19 @@ input[type="submit"].create-profile-link:hover {
     text-decoration: none;
     cursor: pointer;
   }
+  #share-buttons {
+    list-style: none; /* Remove default list item markers */
+    padding: 0;      /* Remove default padding */
+    margin-top: 20px;
+    display: flex;   /* Make the list items display horizontally */
+    justify-content: center; /* Center the list items */
+  }
+ 
+  #share-buttons li {
+    margin: 0 10px; /* Add some space between the list items */
+  }
+ 
+  #share-buttons img {
+    width: 30px; /* Adjust icon size as needed */
+    height: auto;
+  }
