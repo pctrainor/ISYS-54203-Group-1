@@ -11,10 +11,10 @@ function displayEvents(eventsToShow) {
     const eventList = document.getElementById('event-list');
     // If there's no place to put events, stop here
     if (!eventList) return;
-    
+
     // Clear out any old events that might be there
     eventList.innerHTML = '';
-    
+
     // For each event, create a card and add it to the page
     eventsToShow.forEach(event => {
         // Create a new 'card' for each event
@@ -28,57 +28,52 @@ function displayEvents(eventsToShow) {
             <p>Category: ${event.category}</p>
             <p>${event.description}</p>
             <a href="#" class="event-details">View Details</a>
+            <div class="social-share">
+                <a href="#" class="share-facebook">Share on Facebook</a>
+                <a href="#" class="share-x">Share on X</a>
+                <a href="#" class="share-whatsapp">Share on WhatsApp</a>
+            </div>
         `;
         // Add the card to the page
         eventList.appendChild(eventCard);
+
+        // Add event listeners for the share buttons
+        const shareFacebookBtn = eventCard.querySelector('.share-facebook');
+        const shareXBtn = eventCard.querySelector('.share-x');
+        const shareWhatsappBtn = eventCard.querySelector('.share-whatsapp');
+
+        shareFacebookBtn.addEventListener('click', () => {
+            shareEvent('facebook', event);
+        });
+
+        shareXBtn.addEventListener('click', () => {
+            shareEvent('x', event);
+        });
+
+        shareWhatsappBtn.addEventListener('click', () => {
+            shareEvent('whatsapp', event);
+        });
     });
 }
 
-// This function finds events that match what the user searched for
-function searchEvents(query) {
-    // Make the search work no matter if people use capital letters or not
-    query = query.toLowerCase();
-    
-    // Look through all events and return ones that match the search
-    return events.filter(event => 
-        event.title.toLowerCase().includes(query) ||
-        event.description.toLowerCase().includes(query) ||
-        event.category.toLowerCase().includes(query)
-    );
+// This function creates the social media share link
+function shareEvent(platform, event) {
+    let url = encodeURIComponent(window.location.href);
+    let text = encodeURIComponent(`${event.title} - ${event.description}`);
+
+    switch (platform) {
+        case 'facebook':
+            url = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`;
+            break;
+        case 'x':
+            url = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+            break;
+        case 'whatsapp':
+            url = `https://wa.me/?text=${text}%20${url}`;
+            break;
+    }
+
+    window.open(url, '_blank');
 }
 
-// This function finds events in a specific category
-function filterEventsByCategory(category) {
-    // Return events that match the given category
-    return events.filter(event => event.category.toLowerCase() === category.toLowerCase());
-}
-
-// When the page loads, show all events if we're on the home page
-if (document.getElementById('event-list')) {
-    displayEvents(events);
-}
-
-// Set up what happens when someone clicks on a category
-document.querySelectorAll('.category').forEach(category => {
-    category.addEventListener('click', (e) => {
-        // Stop the default link behavior
-        e.preventDefault();
-        // Get the name of the category that was clicked
-        const categoryName = category.querySelector('p').textContent;
-        // Go to a new page showing events for that category
-        window.location.href = `EventsByCategory.html?category=${categoryName}`;
-    });
-});
-
-// Make the calendar days change color when you hover over them
-const days = document.querySelectorAll('.day');
-days.forEach(day => {
-    // When the mouse goes over a day, make it darker
-    day.addEventListener('mouseover', () => {
-        day.style.backgroundColor = '#ddd';
-    });
-    // When the mouse leaves a day, make it lighter again
-    day.addEventListener('mouseout', () => {
-        day.style.backgroundColor = '#eee';
-    });
-});
+// ... (rest of your code)
