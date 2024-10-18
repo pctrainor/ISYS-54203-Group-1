@@ -202,3 +202,28 @@ function shareEvent(event) {
       eventList.appendChild(eventCard);
     });
   }
+
+  //Login.error.js
+// Add event listener to the form
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting
+
+    // Get email and password input values
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@uark\.edu$/; // Regex for UARK email
+    const errorMessageElement = document.getElementById('error-message');
+
+    // Check if the email matches the UARK pattern
+    if (!emailPattern.test(email)) {
+        errorMessageElement.textContent = 'Invalid credentials. Please use a UARK email address (e.g., @uark.edu).';
+        errorMessageElement.style.display = 'block'; // Show the error message
+    } else if (password === "") {
+        errorMessageElement.textContent = 'Password cannot be empty.';
+        errorMessageElement.style.display = 'block'; // Show error if password is empty
+    } else {
+        errorMessageElement.style.display = 'none'; // Hide the error message if email is valid
+        // Proceed with form submission or further actions
+        alert('Login successful!'); // Replace with actual login logic
+    }
+});
