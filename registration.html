@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Campus Event Calendar - Sign Up</title>
-  <link rel="stylesheet" href="Style/style.css"> 
+  <link rel="stylesheet" href="Style/style.css">  
 </head>
 <body>
   <div class="container">
@@ -41,12 +41,16 @@
       <input type="submit" value="Create Profile" class="create-profile-link">
     </form>
 
-    <div id="result" style="display: none;"> 
-      <h2>Profile Summary</h2>
+    <div id="resultModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="result"> 
+          <h2>Profile Summary</h2>
+        </div>
+      </div>
     </div>
   </div>
 
-  <->
   <script>
     function displayResult(event) {
       event.preventDefault(); 
@@ -55,8 +59,8 @@
       const firstName = document.getElementById("firstName").value;
       const lastName = document.getElementById("lastName").value;
       const email = document.getElementById("email").value;
-      const major = document.getElementById("major").value;
-      const year = document.getElementById("year").value;
+      let major = document.getElementById("major").value;
+      let year = document.getElementById("year").value;
 
       let notificationPrefs = [];
       if (document.getElementById("allEvents").checked) {
@@ -69,6 +73,17 @@
         notificationPrefs.push("Events from my major/department");
       }
 
+      if (major === "") {
+        major = "Not provided";
+      }
+      if (year === "") {
+        year = "Not provided";
+      }
+
+      if (notificationPrefs.length === 0) {
+        notificationPrefs = ["None"]; 
+      } 
+
       const resultDiv = document.getElementById("result");
       resultDiv.innerHTML = `
         <h2>Profile Summary</h2>
@@ -78,8 +93,25 @@
         <p><strong>Major/Department:</strong> ${major}</p>
         <p><strong>Year of Study:</strong> ${year}</p>
         <p><strong>Notification Preferences:</strong> ${notificationPrefs.join(", ")}</p>
+        <button onclick="confirmRegistration()">Confirm Registration</button> 
       `;
-      resultDiv.style.display = "block"; 
+
+      openModal();
+    }
+
+    function openModal() {
+      document.getElementById("resultModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("resultModal").style.display = "none";
+    }
+
+    function confirmRegistration() {
+      alert("Registration Confirmed!"); 
+      // Redirect to Home.html
+      window.location.href = "Home.html"; 
+      closeModal();
     }
   </script>
 </body>
