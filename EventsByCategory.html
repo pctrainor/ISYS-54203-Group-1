@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="Style/style.css">
     <!-- Link to the home-specific stylesheet -->
     <link rel="stylesheet" href="Style/home.css">
+    
 </head>
 <body>
     <!-- Header section of the page -->
@@ -16,6 +17,23 @@
         <h1>Campus Event Calendar</h1>
         <p>Stay updated on all the exciting events happening on campus!</p>
     </header>
+
+    <main class="container">
+        <div id="filter-bar">
+            <label for="category-filter">Filter by Category:</label>
+            <select id="category-filter">
+                <option value="all">All Categories</option>
+                <option value="Music">Music</option>
+                <option value="Arts">Arts</option>
+                <option value="Sports">Sports</option>
+                <option value="Academic">Academic</option>
+                <!-- Add more categories as needed -->
+            </select>
+        </div>
+
+        <h2 id="category-title">Events by Category</h2>
+        <div id="event-list" class="event-list"></div>
+    </main>
 
     <!-- Main content of the page -->
     <main class="container">
@@ -57,8 +75,32 @@
             "Sports": "#fa0",   // Orange
             "Academic": "#0f0"  // Green
         };
-        // Set the color of the category title. If the category is not in the list, default to black (#000)
-        document.getElementById('category-title').style.color = categoryColors[category] || "#000";
+        function updateEvents() {
+            let filteredEvents;
+            if (category === 'all') {
+                filteredEvents = allEvents;  // Assuming you have an 'allEvents' array in script.js
+                categoryTitle.textContent = "All Events";
+            } else {
+                filteredEvents = filterEventsByCategory(category);
+                categoryTitle.textContent = `${category} Events`;
+            }
+            displayEvents(filteredEvents);
+            categoryTitle.style.color = categoryColors[category] || "#000";
+        }
+
+
+        categoryFilter.addEventListener('change', () => {
+            category = categoryFilter.value;
+            updateEvents();
+            // Optional: Update the URL to reflect the selected category
+            // window.history.pushState({}, '', `?category=${category}`); 
+        });
+
+
+        // Set the initial state based on the URL or default to 'all'
+        categoryFilter.value = category; // Set the dropdown to the correct category
+        updateEvents();
+
     </script>
 </body>
 </html>
