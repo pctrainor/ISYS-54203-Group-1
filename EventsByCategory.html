@@ -2,17 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Ensures proper rendering and touch zooming for all devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events by Category - Campus Event Calendar</title>
-    <!-- Link to the main stylesheet -->
-    <link rel="stylesheet" href="Style/style.css">
-    <!-- Link to the home-specific stylesheet -->
-    <link rel="stylesheet" href="Style/home.css">
-    
-</head>
+    <link rel="stylesheet" href="Style/style.css"> 
+ </head>
 <body>
-    <!-- Header section of the page -->
     <header>
         <h1>Campus Event Calendar</h1>
         <p>Stay updated on all the exciting events happening on campus!</p>
@@ -20,14 +14,16 @@
 
     <main class="container">
         <div id="filter-bar">
-            <label for="category-filter">Filter by Category:</label>
+            <h3>Filter by Category:</h3> </div>
             <select id="category-filter">
                 <option value="all">All Categories</option>
                 <option value="Music">Music</option>
                 <option value="Arts">Arts</option>
                 <option value="Sports">Sports</option>
                 <option value="Academic">Academic</option>
-                <!-- Add more categories as needed -->
+                <option value="Outdoor">Outdoor</option>
+                <option value="Historic">Historic</option>
+
             </select>
         </div>
 
@@ -35,50 +31,70 @@
         <div id="event-list" class="event-list"></div>
     </main>
 
-    <!-- Main content of the page -->
-    <main class="container">
-        <!-- Title for the category, which will be dynamically updated -->
-        <h2 id="category-title">Events by Category</h2>
-        <!-- Container for the list of events, which will be populated dynamically -->
-        <div id="event-list" class="event-list">
-            <!-- Events will be dynamically added here by JavaScript -->
-        </div>
-    </main>
-
-    <!-- Footer section of the page -->
     <footer>
         <p>&copy; 2023 Campus Event Calendar</p>
     </footer>
 
-    <!-- Link to the main JavaScript file -->
-    <script src="script.js"></script>
-    
-    <!-- Inline JavaScript for category-specific functionality -->
     <script>
-        // Get the category from the URL parameter
-        // For example, if the URL is "EventsByCategory.html?category=Music", this will extract "Music"
-        const urlParams = new URLSearchParams(window.location.search);
-        const category = urlParams.get('category');
+      // Sample event data (replace with your actual data)
+      const allEvents = [
+        { title: "Concert in the Park", date: "2024-03-15", category: "Music", description: "Enjoy live music in the park."},
+        { title: "Art Exhibition", date: "2024-04-20", category: "Arts", description: "See amazing art by local students"},
+        { title: "Basketball Game", date: "2024-05-10", category: "Sports", description: "Cheer for our home team!"},
+        { title: "Physics Seminar", date: "2024-06-05", category: "Academic", description: "Learn about the latest in physics"},
+        { title: "Open Mic Night", date: "2024-03-22", category: "Music", description: "Show off your talent!" },
+        { title: "Sculpture Workshop", date: "2024-04-27", category: "Arts", description: "Learn to sculpt." },
+        { title: "Soccer Tournament", date: "2024-05-17", category: "Sports", description: "Compete in a soccer tournament!"},
+        { title: "Math Lecture", date: "2024-06-12", category: "Academic", description: "Explore advanced mathematical concepts"},
 
-        // Update the page title with the selected category
-        document.getElementById('category-title').textContent = `${category} Events`;
+      ];
 
-        // Filter and display events for the selected category
-        // These functions (filterEventsByCategory and displayEvents) should be defined in script.js
-        const filteredEvents = filterEventsByCategory(category);
-        displayEvents(filteredEvents);
+      const categoryFilter = document.getElementById('category-filter');
+      const categoryTitle = document.getElementById('category-title');
+      const eventList = document.getElementById('event-list');
 
-        // Add color to the category title based on the category
-        const categoryColors = {
-            "Music": "#f0a",    // Pink
-            "Arts": "#0af",     // Light Blue
-            "Sports": "#fa0",   // Orange
-            "Academic": "#0f0"  // Green
+
+      const categoryColors = {
+            "Music": "#f0a",
+            "Arts": "#0af",
+            "Sports": "#fa0",
+            "Academic": "#0f0",
+            "all": "#000" 
         };
+
+      function filterEventsByCategory(category) {
+          if (category === 'all') {
+            return allEvents;
+          }
+          return allEvents.filter(event => event.category === category);
+      }
+
+      function displayEvents(events) {
+          eventList.innerHTML = ''; // Clear previous events
+
+            if(events.length === 0) {
+                eventList.innerHTML = "<p>No events found for this category.</p>";
+                return; 
+            }
+
+
+          events.forEach(event => {
+              const eventDiv = document.createElement('div');
+              eventDiv.classList.add('event'); // Add event class for styling
+              eventDiv.innerHTML = `<h3>${event.title}</h3><p>${event.date}</p><p>${event.description}</p>`;
+              eventList.appendChild(eventDiv);
+          });
+      }
+
+
+
         function updateEvents() {
             let filteredEvents;
+            let category = categoryFilter.value;
+
+
             if (category === 'all') {
-                filteredEvents = allEvents;  // Assuming you have an 'allEvents' array in script.js
+                filteredEvents = allEvents;  
                 categoryTitle.textContent = "All Events";
             } else {
                 filteredEvents = filterEventsByCategory(category);
@@ -86,21 +102,18 @@
             }
             displayEvents(filteredEvents);
             categoryTitle.style.color = categoryColors[category] || "#000";
+
         }
 
 
-        categoryFilter.addEventListener('change', () => {
-            category = categoryFilter.value;
-            updateEvents();
-            // Optional: Update the URL to reflect the selected category
-            // window.history.pushState({}, '', `?category=${category}`); 
-        });
+        categoryFilter.addEventListener('change', updateEvents);
 
-
-        // Set the initial state based on the URL or default to 'all'
-        categoryFilter.value = category; // Set the dropdown to the correct category
+        // Initial display
         updateEvents();
 
+
     </script>
+
 </body>
 </html>
+
