@@ -31,7 +31,83 @@ function displayEvents(eventsToShow) {
         eventList.appendChild(eventCard);
     });
 }
+// Add to Outlook Calendar
+document.addEventListener('DOMContentLoaded', () => {
+    // Keep existing event display code
+    if (document.getElementById('event-list')) {
+        displayEvents(events);
+    }
 
+    // Initialize calendar functionality
+    initializeAddToCalendar();
+});
+
+// code for .ics file generation
+function initializeAddToCalendar() {
+    const addToCalendarButton = document.getElementById('addToCalendarButton');
+    if (!addToCalendarButton) return;
+
+    const eventDetails = extractEventDetails();
+    if (eventDetails) {
+        setupAddToCalendarButton(eventDetails);
+    }
+}
+
+function extractEventDetails() {
+    const details = document.getElementById('eventDetails');
+    if (!details) return null;
+
+    return {
+        title: details.querySelector('h1').textContent || '',
+        startDate: details.querySelector('.start-date').textContent || '',
+        endDate: details.querySelector('.end-date').textContent || '',
+        description: details.querySelector('.description').textContent || '',
+        location: details.querySelector('.location').textContent || ''
+    };
+}
+
+function setupAddToCalendarButton(eventDetails) {
+    const addToCalendarButton = document.getElementById('addToCalendarButton');
+    if (!addToCalendarButton) return;
+
+    addToCalendarButton.addEventListener('click', () => {
+        const icsContent = createICSFile(eventDetails);
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'event.ics';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        alert('Event .ics file has been downloaded. You can now import this into your calendar application.');
+    });
+}
+
+function createICSFile(eventDetails) {
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    };
+
+    const startDate = formatDate(eventDetails.startDate);
+    const endDate = formatDate(eventDetails.endDate);
+
+    return `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Your Company//Your Product//EN
+BEGIN:VEVENT
+UID:${new Date().getTime()}@yourdomain.com
+DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'}
+DTSTART:${startDate}
+DTEND:${endDate}
+SUMMARY:${eventDetails.title}
+DESCRIPTION:${eventDetails.description}
+LOCATION:${eventDetails.location}
+END:VEVENT
+END:VCALENDAR`;
+}        
 // Function to generate a shareable link for an event
 function shareEvent(event) {
     const eventData = {
