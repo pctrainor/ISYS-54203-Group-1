@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
-    <div class="container"> 
+    <div class="container">
         <h1>Sign Up for Campus Events</h1>
         <p>Create a profile to personalize your event notifications.</p>
 
@@ -43,22 +43,15 @@
 
             <input type="submit" value="Create Profile">
         </form>
-
-        <div id="resultModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <div id="result">
-                    <h2>Profile Summary</h2>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
+        // registration.html
+
         document.getElementById('registrationForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            // Gather all form data
+            // Gather all form data 
             const studentID = document.getElementById("studentID").value;
             const firstName = document.getElementById("firstName").value;
             const lastName = document.getElementById("lastName").value;
@@ -69,13 +62,13 @@
 
             let notificationPrefs = [];
             if (document.getElementById("allEvents").checked) {
-                notificationPrefs.push("All campus events");
+                notificationPrefs.push("all");
             }
             if (document.getElementById("categoryEvents").checked) {
-                notificationPrefs.push("Events from specific categories");
+                notificationPrefs.push("category");
             }
             if (document.getElementById("majorEvents").checked) {
-                notificationPrefs.push("Events from my major/department");
+                notificationPrefs.push("major");
             }
 
             const profileData = {
@@ -86,7 +79,7 @@
                 password: password,
                 major: major,
                 year: year,
-                notificationPrefs: notificationPrefs 
+                notificationPrefs: notificationPrefs
             };
 
             fetch('http://127.0.0.1:5000/profile', {
@@ -96,19 +89,52 @@
                 },
                 body: JSON.stringify(profileData)
             })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message); 
+            .then(response => {
+                if (!response.ok) {
+                    // Handle errors here
+                    return response.json().then(data => {
+                        if (response.status === 400) {
+                            if (data.message.includes("password")) {
+                                alert("Password requirements not met. Please try again.");
+                                document.getElementById("password").focus(); 
+                                // Stop further execution here
+                                throw new Error("Password requirements not met"); // Throw an error to stop the chain
+                            } else if (data.message.includes("Email address already exists")) {
+                                alert("Email address already exists. Please use a different email.");
+                                document.getElementById("email").focus();
+                                // Stop further execution here
+                                throw new Error("Email already exists"); // Throw an error to stop the chain
+                            } else {
+                                alert(data.message); 
+                                throw new Error('Registration failed: ' + data.message); 
+                            }
+                        } else {
+                            throw new Error('Registration failed: ' + response.statusText);
+                        }
+                    });
+                } else {
+                    // Successful registration
+                    return response.json(); 
+                }
+            })
+            .then(data => { 
+                // This block will only execute if the registration was successful
+                localStorage.setItem('profileData', JSON.stringify({
+                    studentID: profileData.studentID,
+                    firstName: profileData.firstName,
+                    lastName: profileData.lastName,
+                    email: profileData.email,
+                    major: profileData.major,
+                    year: profileData.year,
+                    notificationPrefs: profileData.notificationPrefs
+                }));
+                window.location.href = "welcome.html";  
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('An error occurred during registration.');
+                alert('An error occurred during registration.'); 
             });
         });
-
-        function closeModal() {
-            document.getElementById("resultModal").style.display = "none";
-        }
     </script>
 </body>
 </html>
