@@ -211,6 +211,129 @@ footer {
     font-size: 16px;
     transition: background-color 0.3s ease;
     width: 100%;
+
+}
+
+.wrap button:hover {
+    background-color: #660000;
+}
+
+  /* Styles for the "Add New Event" button */
+  .add-event-button {
+    background-color: #8B0000; /* Dark red background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Adds space inside the button */
+    border: none; /* Removes the border */
+    border-radius: 5px; /* Rounds the corners */
+    cursor: pointer; /* Changes cursor to a hand on hover */
+    font-size: 16px; /* Sets text size */
+    transition: background-color 0.3s ease; /* Smooth color transition on hover */
+    display: inline-block; /* Aligns button inline with text */
+    margin: 20px 0; /* Adds vertical spacing */
+}
+
+/* Changes color when hovering over the "Add New Event" button */
+.add-event-button:hover {
+    background-color: #A52A2A; /* Lighter red on hover */
+}
+
+/* Styles for form inputs */
+input[type="text"], input[type="date"], input[type="time"], textarea {
+    width: 100%; /* Makes inputs full width */
+    padding: 12px; /* Adds space inside inputs */
+    margin: 10px 0; /* Adds space above and below inputs */
+    border: 2px solid #9D2235; /* Adds a Razorback red border */
+    border-radius: 4px; /* Rounds the corners */
+    font-size: 16px; /* Sets text size */
+    box-sizing: border-box; /* Includes padding and border in element's total width and height */
+}
+
+/* Styles for the submit button */
+button[type="submit"] {
+    background-color: #8B0000; /* Dark red background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Adds space inside the button */
+    border: none; /* Removes the border */
+    border-radius: 5px; /* Rounds the corners */
+    cursor: pointer; /* Changes cursor to a hand on hover */
+    font-size: 16px; /* Sets text size */
+    transition: background-color 0.3s ease; /* Smooth color transition on hover */
+}
+
+/* Changes color when hovering over the submit button */
+button[type="submit"]:hover {
+    background-color: #A52A2A; /* Lighter red on hover */
+}
+
+.error-message {
+    color: red;
+    margin: 10px 0;
+    padding: 10px;
+    display: none;
+    background-color: #ffebee;
+    border: 1px solid #ffcdd2;
+    border-radius: 4px;
+}
+
+.confirmation-page {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.event-summary {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+.confirmation-page button {
+    background-color: #8B0000; /* Dark red background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Adds space inside the button */
+    border: none; /* Removes the border */
+    border-radius: 5px; /* Rounds the corners */
+    cursor: pointer; /* Changes cursor to a hand on hover */
+    font-size: 16px; /* Sets text size */
+    transition: background-color 0.3s ease; /* Smooth color transition on hover */
+    margin-top: 20px; /* Adds space above the button */
+    width: 200px; /* Set a fixed width */
+}
+
+.confirmation-page button:hover {
+    background-color: #A52A2A; /* Lighter red on hover */
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #9D2235;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    border-color: #8B0000;
+}
+
+/* Style for the dropdown arrow */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239D2235' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+
 }
 
 .wrap button:hover {

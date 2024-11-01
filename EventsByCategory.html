@@ -42,8 +42,6 @@
       .multiselect-options label:hover {
         background-color: #f0f0f0;
       }
-
-
     </style>
 </head>
 <body>
@@ -57,97 +55,108 @@
             <h3>Filter by Category:</h3>
 
             <div class="multiselect-options">
-                <label><input type="checkbox" id="Music" value="Music"> Music</label>
-                <label><input type="checkbox" id="Arts" value="Arts"> Arts</label>
-                <label><input type="checkbox" id="Sports" value="Sports"> Sports</label>
-                <label><input type="checkbox" id="Academic" value="Academic"> Academic</label>
-                <label><input type="checkbox" id="Outdoor" value="Outdoor"> Outdoor</label>
-                <label><input type="checkbox" id="Historic" value="Historic"> Historic</label>
+                <!-- Checkboxes will be dynamically generated here -->
             </div>
             <div>
               <br>
                 <button onclick="resetFilters()">Reset</button> <button onclick="applyFilters()">View Results</button>
             </div>
-
-
-
+        </div>
 
         <h2 id="category-title">Events by Category</h2>
         <div id="event-list" class="event-list"></div>
     </main>
-
 
     <footer>
         <p>&copy; 2024 Campus Event Calendar</p>
     </footer>
 
     <script>
-      const allEvents = [ // ... your event data ...
-        { title: "Concert in the Park", date: "2024-03-15", category: "Music", description: "Enjoy live music in the park."},
-        { title: "Art Exhibition", date: "2024-04-20", category: "Arts", description: "See amazing art by local students"},
-        { title: "Basketball Game", date: "2024-05-10", category: "Sports", description: "Cheer for our home team!"},
-        { title: "Physics Seminar", date: "2024-06-05", category: "Academic", description: "Learn about the latest in physics"},
-        { title: "Open Mic Night", date: "2024-03-22", category: "Music", description: "Show off your talent!" },
-        { title: "Sculpture Workshop", date: "2024-04-27", category: "Arts", description: "Learn to sculpt." },
-        { title: "Soccer Tournament", date: "2024-05-17", category: "Sports", description: "Compete in a soccer tournament!"},
-        { title: "Math Lecture", date: "2024-06-12", category: "Academic", description: "Explore advanced mathematical concepts"}
-      ];
+        // Load all events from localStorage and combine with default events
+        const defaultEvents = [ // Default events
+            { title: "Concert in the Park", date: "2024-03-15", category: "Music", description: "Enjoy live music in the park."},
+            { title: "Art Exhibition", date: "2024-04-20", category: "Arts", description: "See amazing art by local students"},
+            { title: "Basketball Game", date: "2024-05-10", category: "Sports", description: "Cheer for our home team!"},
+            { title: "Physics Seminar", date: "2024-06-05", category: "Academic", description: "Learn about the latest in physics"},
+            { title: "Open Mic Night", date: "2024-03-22", category: "Music", description: "Show off your talent!" },
+            { title: "Sculpture Workshop", date: "2024-04-27", category: "Arts", description: "Learn to sculpt." },
+            { title: "Soccer Tournament", date: "2024-05-17", category: "Sports", description: "Compete in a soccer tournament!"},
+            { title: "Math Lecture", date: "2024-06-12", category: "Academic", description: "Explore advanced mathematical concepts"}
+        ];
 
-      const categoryTitle = document.getElementById('category-title');
-      const eventList = document.getElementById('event-list');
-      const filterBar = document.getElementById('filter-bar');
+        // Get stored events from localStorage
+        const storedEvents = JSON.parse(localStorage.getItem('events')) || [];
+        
+        // Combine default and stored events
+        const allEvents = [...defaultEvents, ...storedEvents];
+        const categoryTitle = document.getElementById('category-title');
+        const eventList = document.getElementById('event-list');
+        const filterBar = document.getElementById('filter-bar');
 
-      function displayEvents(events) {
-          // ... (same as before)
-          eventList.innerHTML = '';
+        // Get unique categories from all events to create checkboxes dynamically
+        const uniqueCategories = [...new Set(allEvents.map(event => event.category))];
+        
+        // Create checkboxes dynamically
+        const multiselectOptions = document.querySelector('.multiselect-options');
+        multiselectOptions.innerHTML = ''; // Clear existing checkboxes
+        
+        uniqueCategories.forEach(category => {
+            const label = document.createElement('label');
+            label.innerHTML = `<input type="checkbox" id="${category}" value="${category}"> ${category}`;
+            multiselectOptions.appendChild(label);
+        });
+        function displayEvents(events) {
+            eventList.innerHTML = '';
 
             if(events.length === 0) {
                 eventList.innerHTML = "<p>No events found for this category.</p>";
                 return; 
             }
 
-          events.forEach(event => {
+            events.forEach(event => {
                 const eventDiv = document.createElement('div');
                 eventDiv.classList.add('event');
-                eventDiv.innerHTML = `<h3>${event.title}</h3><p>${event.date}</p><p>${event.description}</p>`;
+                eventDiv.innerHTML = `
+                    <h3>${event.title}</h3>
+                    <p>Date: ${event.date}</p>
+                    <p>Time: ${event.time || 'Not specified'}</p>
+                    <p>Category: ${event.category}</p>
+                    <p>${event.description}</p>
+                    ${event.location ? `<p>Location: ${event.location}</p>` : ''}
+                `;
                 eventList.appendChild(eventDiv);
-          });
+            });
+        }
 
-      }
+        function applyFilters() {
+            const selectedCategories = [];
+            filterBar.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                if(checkbox.id !== 'all'){
+                   selectedCategories.push(checkbox.value);
+                }
+            });
 
-      function applyFilters() {
-        const selectedCategories = [];
-        filterBar.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
-            if(checkbox.id !== 'all'){
-               selectedCategories.push(checkbox.value);
-            }
-        });
+            let filteredEvents = allEvents;
 
-
-          let filteredEvents = allEvents;
-
-          if (selectedCategories.length > 0) {
+            if (selectedCategories.length > 0) {
                 filteredEvents = allEvents.filter(event => selectedCategories.includes(event.category));
                 categoryTitle.textContent = `${selectedCategories.join(', ')} Events`;
-            } else{
+            } else {
                 categoryTitle.textContent = "All Events";
             }
 
-          displayEvents(filteredEvents);
-
-      }
+            displayEvents(filteredEvents);
+        }
         function resetFilters() {
             filterBar.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                 checkbox.checked = checkbox.id === 'all';
+                checkbox.checked = false;
             });
-
-            applyFilters();
+            categoryTitle.textContent = "All Events";
+            displayEvents(allEvents);
         }
 
         // Initial display
-        applyFilters();
-
-
+        displayEvents(allEvents);
     </script>
 </body>
 </html>
