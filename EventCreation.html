@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event</title>
+    <link rel="stylesheet" href="Style/style.css">
+</head>
+<body>
+    <!-- Header section of the page -->
+    <header>
+        <h1>Campus Event Calendar</h1>
+        <p>Organize and manage your campus events effortlessly!</p>
+    </header>
+
+    <!-- Main content area for event creation -->
+    <div class="container">
+        <section id="create-event">
+            <h2>Create New Event</h2>
+            <form id="eventCreationForm">
+                <!-- Event Name Field -->
+                <label for="eventName">Event Name:</label><br>
+                <input type="text" id="eventName" name="eventName" placeholder="Enter event name" required><br>
+            
+                <!-- Event Date Field -->
+                <label for="eventDate">Event Date:</label><br>
+                <input type="date" id="eventDate" name="eventDate" required><br>
+            
+                <!-- Event Time Field -->
+                <label for="eventTime">Event Time:</label><br>
+                <input type="time" id="eventTime" name="eventTime" required><br>
+            
+                <!-- Event Location Field -->
+                <label for="eventLocation">Event Location:</label><br>
+                <input type="text" id="eventLocation" name="eventLocation" placeholder="Enter event location" required><br>
+            
+                <!-- Event Category Field -->
+                <label for="eventCategory">Event Category:</label><br>
+                <select id="eventCategory" name="eventCategory" required>
+                    <option value="">Select a category</option>
+                    <option value="Arts">Arts</option>
+                    <option value="Academic">Academic</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Music">Music</option>
+                    <option value="Social">Social</option>
+                    <option value="Other">Other</option>
+                </select><br>
+            
+                <!-- Event Description Field -->
+                <label for="eventDescription">Event Description:</label><br>
+                <textarea id="eventDescription" name="eventDescription" placeholder="Enter event description" required></textarea><br>
+            
+                <!-- Submit Button -->
+                <button type="submit" id="submitButton" disabled>Submit</button>
+            
+                <!-- Error Message Display -->
+                <div id="error-message" class="error-message"></div>
+            </form>
+        </section>
+    </div>
+
+    <!-- Footer section of the page -->
+    <footer>
+        <p>&copy; 2023 Campus Event Calendar</p>
+    </footer>
+
+    <script>
+        // Remove any existing event listeners when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('eventCreationForm');
+            if (!form) return; // Exit if we're not on the event creation page
+
+            const submitButton = document.getElementById('submitButton');
+            const errorMessageElement = document.getElementById('error-message');
+
+            // Function to validate date
+            function isDateInFuture(dateString) {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0); // Reset time part for date comparison
+                const inputDate = new Date(dateString);
+                return inputDate > today;
+            }
+
+            // Enable/disable submit button and validate form
+            form.addEventListener('input', () => {
+                const eventDate = new Date(form.eventDate.value);
+                const isValid = form.checkValidity() && isDateInFuture(form.eventDate.value);
+                
+                submitButton.disabled = !isValid;
+                
+                if (isValid) {
+                    errorMessageElement.style.display = 'none';
+                }
+            });
+
+            // Handle form submission
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                
+                // Get form values
+                const newEvent = {
+                    title: form.eventName.value.trim(),
+                    date: form.eventDate.value,
+                    time: form.eventTime.value,
+                    location: form.eventLocation.value.trim(),
+                    category: form.eventCategory.value.trim(),
+                    description: form.eventDescription.value.trim()
+                };
+
+                // Validate date again
+                if (!isDateInFuture(newEvent.date)) {
+                    errorMessageElement.textContent = 'Event date must be in the future';
+                    errorMessageElement.style.display = 'block';
+                    return;
+                }
+
+                try {
+                    // Add to events array
+                    const events = JSON.parse(localStorage.getItem('events')) || [];
+                    events.push(newEvent);
+                    
+                    // Save to localStorage
+                    localStorage.setItem('events', JSON.stringify(events));
+
+                    // Show success message and summary
+                    document.body.innerHTML = `
+                        <div class="confirmation-page">
+                            <h1>Event Created Successfully!</h1>
+                            <div class="event-summary">
+                                <h2>Event Details:</h2>
+                                <p><strong>Name:</strong> ${newEvent.title}</p>
+                                <p><strong>Date:</strong> ${new Date(newEvent.date).toLocaleDateString()}</p>
+                                <p><strong>Time:</strong> ${newEvent.time}</p>
+                                <p><strong>Location:</strong> ${newEvent.location}</p>
+                                <p><strong>Category:</strong> ${newEvent.category}</p>
+                                <p><strong>Description:</strong> ${newEvent.description}</p>
+                            </div>
+                            <button onclick="window.location.href='Home.html'" class="home-button">Return to Home Page</button>
+                        </div>
+                    `;
+
+                    console.log('Event created successfully:', newEvent);
+                    
+                } catch (error) {
+                    errorMessageElement.textContent = 'Error creating event. Please try again.';
+                    errorMessageElement.style.display = 'block';
+                    console.error('Error creating event:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
