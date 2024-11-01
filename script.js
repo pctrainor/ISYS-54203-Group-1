@@ -1,6 +1,6 @@
 // This is our list of events. In a real app, this would come from a database.
 const events = [
-    { title: "Movie Night", date: "2023-10-15", time: "19:00", category: "Arts", description: "Join us for an outdoor movie night!" },
+    { title: "Movie Night", date: "2023-10-15", time: "19:00", category: "Arts", description: "Join us for an outdoor movie night!"},
     { title: "Tech Talk", date: "2023-10-20", time: "14:00", category: "Academic", description: "Learn about the latest in AI technology." },
     { title: "Sports Tournament", date: "2023-10-25", time: "10:00", category: "Sports", description: "Annual inter-college sports tournament." },
     { title: "Music Concert", date: "2023-11-20", time: "18:00", category: "Music", description: "Enjoy a night of classical music.", location: "University Auditorium" },
@@ -23,6 +23,7 @@ function displayEvents(eventsToShow) {
             <p>Time: ${event.time}</p>
             <p>Category: ${event.category}</p>
             <p>${event.description}</p>
+            <button id="addToCalendarButton">Add to Calendar</button>
         `;
         eventCard.addEventListener('click', () => {
             const url = `EventDetails.html?title=${encodeURIComponent(event.title)}&date=${encodeURIComponent(event.date)}&time=${encodeURIComponent(event.time)}&location=${encodeURIComponent(event.location || '')}`;
@@ -32,40 +33,6 @@ function displayEvents(eventsToShow) {
     });
 }
 // Add to Outlook Calendar
-document.addEventListener('DOMContentLoaded', () => {
-    // Keep existing event display code
-    if (document.getElementById('event-list')) {
-        displayEvents(events);
-    }
-
-    // Initialize calendar functionality
-    initializeAddToCalendar();
-});
-
-// code for .ics file generation
-function initializeAddToCalendar() {
-    const addToCalendarButton = document.getElementById('addToCalendarButton');
-    if (!addToCalendarButton) return;
-
-    const eventDetails = extractEventDetails();
-    if (eventDetails) {
-        setupAddToCalendarButton(eventDetails);
-    }
-}
-
-function extractEventDetails() {
-    const details = document.getElementById('eventDetails');
-    if (!details) return null;
-
-    return {
-        title: details.querySelector('h1').textContent || '',
-        startDate: details.querySelector('.start-date').textContent || '',
-        endDate: details.querySelector('.end-date').textContent || '',
-        description: details.querySelector('.description').textContent || '',
-        location: details.querySelector('.location').textContent || ''
-    };
-}
-
 function setupAddToCalendarButton(eventDetails) {
     const addToCalendarButton = document.getElementById('addToCalendarButton');
     if (!addToCalendarButton) return;
@@ -85,6 +52,7 @@ function setupAddToCalendarButton(eventDetails) {
     });
 }
 
+// Function to create the .ics file content
 function createICSFile(eventDetails) {
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -107,7 +75,8 @@ DESCRIPTION:${eventDetails.description}
 LOCATION:${eventDetails.location}
 END:VEVENT
 END:VCALENDAR`;
-}        
+}
+
 // Function to generate a shareable link for an event
 function shareEvent(event) {
     const eventData = {
