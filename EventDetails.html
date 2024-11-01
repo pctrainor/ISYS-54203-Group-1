@@ -31,6 +31,18 @@
         </section>
     </div>
 
+    <!-- Add this inside the event-details section -->
+    <div id="pet-policy-details">
+        <h3>Pet Policy</h3>
+        <p id="pets-allowed"></p>
+        <div id="pet-policy-info" style="display: none;">
+            <p id="leash-requirement"></p>
+            <p id="pet-rules"></p>
+            <p id="pet-friendly-areas"></p>
+            <p id="pet-care-options"></p>
+        </div>
+    </div>
+
     <!-- Footer section of the page -->
     <footer>
         <p>&copy; 2023 Campus Event Calendar</p>
@@ -68,5 +80,42 @@
             }
         });
     </script>
+
+    <!-- Updated the JavaScript section to include pets ~ Peter Nguyen-->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const params = new URLSearchParams(window.location.search);
+        const eventTitle = params.get('title');
+        
+        const event = events.find(e => e.title === eventTitle);
+    
+        if (event) {
+            // Existing code...
+    
+            // Add pet policy information
+            if (event.petPolicy) {
+                document.getElementById('pets-allowed').textContent = 
+                    `Pets: ${event.petPolicy.petsAllowed ? 'Allowed' : 'Not Allowed'}`;
+                
+                if (event.petPolicy.petsAllowed) {
+                    const policyInfo = document.getElementById('pet-policy-info');
+                    policyInfo.style.display = 'block';
+                    
+                    document.getElementById('leash-requirement').textContent = 
+                        `Leash Required: ${event.petPolicy.leashRequired ? 'Yes' : 'No'}`;
+                    document.getElementById('pet-rules').textContent = 
+                        `Pet Rules: ${event.petPolicy.petRules || 'N/A'}`;
+                    document.getElementById('pet-friendly-areas').textContent = 
+                        `Pet-Friendly Areas: ${event.petPolicy.petFriendlyAreas || 'N/A'}`;
+                    document.getElementById('pet-care-options').textContent = 
+                        `Pet Care Options: ${event.petPolicy.petCareOptions || 'N/A'}`;
+                }
+            }
+        } else {
+            document.getElementById('event-details').innerHTML = '<p>Event not found.</p>';
+        }
+    });
+    </script>
+
 </body>
 </html>
