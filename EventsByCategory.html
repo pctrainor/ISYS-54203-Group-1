@@ -4,8 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events by Category - Campus Event Calendar</title>
-    <link rel="stylesheet" href="Style/style.css"> 
- </head>
+    <link rel="stylesheet" href="Style/style.css">
+    <style>
+      /* Basic Styling - Customize as needed */
+      .filter-bar {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+        justify-content: center; /* Center content vertically */
+      }
+
+      .multiselect { /* Styles for the dropdown */
+        position: relative;
+        display: inline-block;
+      }
+      .multiselect select { /* Hide the default select element */
+        display: none;
+      }
+      .multiselect-options {
+        display: flex;              /* Make checkboxes horizontal */
+        flex-wrap: wrap;           /* Allow wrapping if they don't fit */
+        justify-content: center; /* Center checkboxes horizontally */
+      }
+      .multiselect-options label {
+        display: inline-flex;       /* Align checkbox and label in line */
+        align-items: center;      /* Vertically center checkbox and label*/
+        margin-right: 10px;        /* Space between options */
+        white-space: nowrap;      /* Prevent labels from wrapping */
+      }
+      .multiselect-options input[type="checkbox"] {
+        margin-right: 5px;
+      }
+
+      /* Add some hover/selected states for better UX */
+      .multiselect-options label:hover {
+        background-color: #f0f0f0;
+      }
+
+
+    </style>
+</head>
 <body>
     <header>
         <h1>Campus Event Calendar</h1>
@@ -13,31 +53,36 @@
     </header>
 
     <main class="container">
-        <div id="filter-bar">
-            <h3>Filter by Category:</h3> </div>
-            <select id="category-filter">
-                <option value="all">All Categories</option>
-                <option value="Music">Music</option>
-                <option value="Arts">Arts</option>
-                <option value="Sports">Sports</option>
-                <option value="Academic">Academic</option>
-                <option value="Outdoor">Outdoor</option>
-                <option value="Historic">Historic</option>
+        <div id="filter-bar" class="filter-bar">
+            <h3>Filter by Category:</h3>
 
-            </select>
-        </div>
+            <div class="multiselect-options">
+                <label><input type="checkbox" id="Music" value="Music"> Music</label>
+                <label><input type="checkbox" id="Arts" value="Arts"> Arts</label>
+                <label><input type="checkbox" id="Sports" value="Sports"> Sports</label>
+                <label><input type="checkbox" id="Academic" value="Academic"> Academic</label>
+                <label><input type="checkbox" id="Outdoor" value="Outdoor"> Outdoor</label>
+                <label><input type="checkbox" id="Historic" value="Historic"> Historic</label>
+            </div>
+            <div>
+              <br>
+                <button onclick="resetFilters()">Reset</button> <button onclick="applyFilters()">View Results</button>
+            </div>
+
+
+
 
         <h2 id="category-title">Events by Category</h2>
         <div id="event-list" class="event-list"></div>
     </main>
 
+
     <footer>
-        <p>&copy; 2023 Campus Event Calendar</p>
+        <p>&copy; 2024 Campus Event Calendar</p>
     </footer>
 
     <script>
-      // Sample event data (replace with your actual data)
-      const allEvents = [
+      const allEvents = [ // ... your event data ...
         { title: "Concert in the Park", date: "2024-03-15", category: "Music", description: "Enjoy live music in the park."},
         { title: "Art Exhibition", date: "2024-04-20", category: "Arts", description: "See amazing art by local students"},
         { title: "Basketball Game", date: "2024-05-10", category: "Sports", description: "Cheer for our home team!"},
@@ -45,75 +90,64 @@
         { title: "Open Mic Night", date: "2024-03-22", category: "Music", description: "Show off your talent!" },
         { title: "Sculpture Workshop", date: "2024-04-27", category: "Arts", description: "Learn to sculpt." },
         { title: "Soccer Tournament", date: "2024-05-17", category: "Sports", description: "Compete in a soccer tournament!"},
-        { title: "Math Lecture", date: "2024-06-12", category: "Academic", description: "Explore advanced mathematical concepts"},
-
+        { title: "Math Lecture", date: "2024-06-12", category: "Academic", description: "Explore advanced mathematical concepts"}
       ];
 
-      const categoryFilter = document.getElementById('category-filter');
       const categoryTitle = document.getElementById('category-title');
       const eventList = document.getElementById('event-list');
-
-
-      const categoryColors = {
-            "Music": "#f0a",
-            "Arts": "#0af",
-            "Sports": "#fa0",
-            "Academic": "#0f0",
-            "all": "#000" 
-        };
-
-      function filterEventsByCategory(category) {
-          if (category === 'all') {
-            return allEvents;
-          }
-          return allEvents.filter(event => event.category === category);
-      }
+      const filterBar = document.getElementById('filter-bar');
 
       function displayEvents(events) {
-          eventList.innerHTML = ''; // Clear previous events
+          // ... (same as before)
+          eventList.innerHTML = '';
 
             if(events.length === 0) {
                 eventList.innerHTML = "<p>No events found for this category.</p>";
                 return; 
             }
 
-
           events.forEach(event => {
-              const eventDiv = document.createElement('div');
-              eventDiv.classList.add('event'); // Add event class for styling
-              eventDiv.innerHTML = `<h3>${event.title}</h3><p>${event.date}</p><p>${event.description}</p>`;
-              eventList.appendChild(eventDiv);
+                const eventDiv = document.createElement('div');
+                eventDiv.classList.add('event');
+                eventDiv.innerHTML = `<h3>${event.title}</h3><p>${event.date}</p><p>${event.description}</p>`;
+                eventList.appendChild(eventDiv);
           });
+
       }
 
-
-
-        function updateEvents() {
-            let filteredEvents;
-            let category = categoryFilter.value;
-
-
-            if (category === 'all') {
-                filteredEvents = allEvents;  
-                categoryTitle.textContent = "All Events";
-            } else {
-                filteredEvents = filterEventsByCategory(category);
-                categoryTitle.textContent = `${category} Events`;
+      function applyFilters() {
+        const selectedCategories = [];
+        filterBar.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+            if(checkbox.id !== 'all'){
+               selectedCategories.push(checkbox.value);
             }
-            displayEvents(filteredEvents);
-            categoryTitle.style.color = categoryColors[category] || "#000";
+        });
 
+
+          let filteredEvents = allEvents;
+
+          if (selectedCategories.length > 0) {
+                filteredEvents = allEvents.filter(event => selectedCategories.includes(event.category));
+                categoryTitle.textContent = `${selectedCategories.join(', ')} Events`;
+            } else{
+                categoryTitle.textContent = "All Events";
+            }
+
+          displayEvents(filteredEvents);
+
+      }
+        function resetFilters() {
+            filterBar.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                 checkbox.checked = checkbox.id === 'all';
+            });
+
+            applyFilters();
         }
 
-
-        categoryFilter.addEventListener('change', updateEvents);
-
         // Initial display
-        updateEvents();
+        applyFilters();
 
 
     </script>
-
 </body>
 </html>
-
