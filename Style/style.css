@@ -211,6 +211,7 @@ footer {
     font-size: 16px;
     transition: background-color 0.3s ease;
     width: 100%;
+
 }
 
 .wrap button:hover {
@@ -332,4 +333,9 @@ select {
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-size: 1em;
+
+}
+
+.wrap button:hover {
+    background-color: #660000;
 }

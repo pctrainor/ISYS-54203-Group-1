@@ -1,118 +1,140 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Campus Event Calendar - Sign Up</title>
-  <link rel="stylesheet" href="Style/style.css">  
+    <title>Campus Event Calendar - Sign Up</title>
+    <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Sign Up for Campus Events</h1>
-    <p>Create a profile to personalize your event notifications.</p>
+    <div class="container">
+        <h1>Sign Up for Campus Events</h1>
+        <p>Create a profile to personalize your event notifications.</p>
 
-    <form action="" method="post" onsubmit="displayResult(event)">
-      <label for="studentID">Student ID:*</label><br>
-      <input type="text" id="studentID" name="studentID" required><br><br>
+        <form id="registrationForm">
+            <label for="studentID">Student ID:*</label><br>
+            <input type="text" id="studentID" name="studentID" required><br><br>
 
-      <label for="firstName">First Name:*</label><br>
-      <input type="text" id="firstName" name="firstName" required><br><br>
+            <label for="firstName">First Name:*</label><br>
+            <input type="text" id="firstName" name="firstName" required><br><br>
 
-      <label for="lastName">Last Name:*</label><br>
-      <input type="text" id="lastName" name="lastName" required><br><br>
+            <label for="lastName">Last Name:*</label><br>
+            <input type="text" id="lastName" name="lastName" required><br><br>
 
-      <label for="email">Email Address:*</label><br>
-      <input type="text" id="email" name="email" required><br><br>
+            <label for="email">Email Address:*</label><br>
+            <input type="text" id="email" name="email" required><br><br>
 
-      <label for="major">Major/Department:</label><br>
-      <input type="text" id="major" name="major"><br><br>
+            <label for="password">Password:*</label><br>
+            <input type="password" id="password" name="password" required><br><br>
 
-      <label for="year">Year of Study:</label><br>
-      <input type="text" id="year" name="year"><br><br>
+            <label for="major">Major/Department:</label><br>
+            <input type="text" id="major" name="major"><br><br>
 
-      <h3>Notification Preferences</h3>
-      <input type="checkbox" id="allEvents" name="notifications" value="all">
-      <label for="allEvents"> All campus events</label><br>
+            <label for="year">Year of Study:</label><br>
+            <input type="text" id="year" name="year"><br><br>
 
-      <input type="checkbox" id="categoryEvents" name="notifications" value="category">
-      <label for="categoryEvents"> Events from specific categories</label><br>
+            <h3>Notification Preferences</h3>
+            <input type="checkbox" id="allEvents" name="notificationPrefs" value="all">
+            <label for="allEvents"> All campus events</label><br>
 
-      <input type="checkbox" id="majorEvents" name="notifications" value="major">
-      <label for="majorEvents"> Events from my major/department</label><br><br>
+            <input type="checkbox" id="categoryEvents" name="notificationPrefs" value="category">
+            <label for="categoryEvents"> Events from specific categories</label><br>
 
-      <input type="submit" value="Create Profile" class="create-profile-link">
-    </form>
+            <input type="checkbox" id="majorEvents" name="notificationPrefs" value="major">
+            <label for="majorEvents"> Events from my major/department</label><br><br>
 
-    <div id="resultModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div id="result"> 
-          <h2>Profile Summary</h2>
-        </div>
-      </div>
+            <input type="submit" value="Create Profile">
+        </form>
     </div>
-  </div>
 
-  <script>
-    function displayResult(event) {
-      event.preventDefault(); 
+    <script>
+        // registration.html
 
-      const studentID = document.getElementById("studentID").value;
-      const firstName = document.getElementById("firstName").value;
-      const lastName = document.getElementById("lastName").value;
-      const email = document.getElementById("email").value;
-      let major = document.getElementById("major").value;
-      let year = document.getElementById("year").value;
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-      let notificationPrefs = [];
-      if (document.getElementById("allEvents").checked) {
-        notificationPrefs.push("All campus events");
-      }
-      if (document.getElementById("categoryEvents").checked) {
-        notificationPrefs.push("Events from specific categories");
-      }
-      if (document.getElementById("majorEvents").checked) {
-        notificationPrefs.push("Events from my major/department");
-      }
+            // Gather all form data 
+            const studentID = document.getElementById("studentID").value;
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const major = document.getElementById("major").value;
+            const year = document.getElementById("year").value;
 
-      if (major === "") {
-        major = "Not provided";
-      }
-      if (year === "") {
-        year = "Not provided";
-      }
+            let notificationPrefs = [];
+            if (document.getElementById("allEvents").checked) {
+                notificationPrefs.push("all");
+            }
+            if (document.getElementById("categoryEvents").checked) {
+                notificationPrefs.push("category");
+            }
+            if (document.getElementById("majorEvents").checked) {
+                notificationPrefs.push("major");
+            }
 
-      if (notificationPrefs.length === 0) {
-        notificationPrefs = ["None"]; 
-      } 
+            const profileData = {
+                studentID: studentID,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password,
+                major: major,
+                year: year,
+                notificationPrefs: notificationPrefs
+            };
 
-      const resultDiv = document.getElementById("result");
-      resultDiv.innerHTML = `
-        <h2>Profile Summary</h2>
-        <p><strong>Student ID:</strong> ${studentID}</p>
-        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Major/Department:</strong> ${major}</p>
-        <p><strong>Year of Study:</strong> ${year}</p>
-        <p><strong>Notification Preferences:</strong> ${notificationPrefs.join(", ")}</p>
-        <button onclick="confirmRegistration()">Confirm Registration</button> 
-      `;
-
-      openModal();
-    }
-
-    function openModal() {
-      document.getElementById("resultModal").style.display = "block";
-    }
-
-    function closeModal() {
-      document.getElementById("resultModal").style.display = "none";
-    }
-
-    function confirmRegistration() {
-      alert("Registration Confirmed!"); 
-      // Redirect to Home.html
-      window.location.href = "Home.html"; 
-      closeModal();
-    }
-  </script>
+            fetch('http://127.0.0.1:5000/profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(profileData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    // Handle errors here
+                    return response.json().then(data => {
+                        if (response.status === 400) {
+                            if (data.message.includes("password")) {
+                                alert("Password requirements not met. Please try again.");
+                                document.getElementById("password").focus(); 
+                                // Stop further execution here
+                                throw new Error("Password requirements not met"); // Throw an error to stop the chain
+                            } else if (data.message.includes("Email address already exists")) {
+                                alert("Email address already exists. Please use a different email.");
+                                document.getElementById("email").focus();
+                                // Stop further execution here
+                                throw new Error("Email already exists"); // Throw an error to stop the chain
+                            } else {
+                                alert(data.message); 
+                                throw new Error('Registration failed: ' + data.message); 
+                            }
+                        } else {
+                            throw new Error('Registration failed: ' + response.statusText);
+                        }
+                    });
+                } else {
+                    // Successful registration
+                    return response.json(); 
+                }
+            })
+            .then(data => { 
+                // This block will only execute if the registration was successful
+                localStorage.setItem('profileData', JSON.stringify({
+                    studentID: profileData.studentID,
+                    firstName: profileData.firstName,
+                    lastName: profileData.lastName,
+                    email: profileData.email,
+                    major: profileData.major,
+                    year: profileData.year,
+                    notificationPrefs: profileData.notificationPrefs
+                }));
+                window.location.href = "welcome.html";  
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during registration.'); 
+            });
+        });
+    </script>
 </body>
 </html>

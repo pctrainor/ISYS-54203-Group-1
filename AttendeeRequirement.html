@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Creation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #0062cc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Event Attendee</h1>
+    </header>
+
+    <div class="container">
+        <form>
+            <label for="attendee-requirements">Attendee Requirements:</label>
+            <select id="attendee-requirements">
+                <option value="open-to-all">Open to All</option>
+                <option value="students-only">Students Only</option>
+                <option value="faculty-only">Faculty Only</option>
+                <option value="students-and-faculty">Students and Faculty</option>
+                <option value="other">Other (specify below)</option>
+            </select>
+
+            <textarea id="other-requirements" placeholder="Specify other requirements"></textarea>
+
+            <button type="submit">Create Event</button>
+        </form>
+    </div>
+
+    <script>
+        // ... (your JavaScript code)
+    </script>
+</body>
+</html>
