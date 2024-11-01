@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Campus Events</title>
+    <link rel="stylesheet" href="Style/style.css">
+</head>
+<body>
+    <div class="welcome-container">
+        <h1>Welcome to Campus Event Calendar!</h1>
+        <p id="greeting"></p>
+        <p>An email verification has been sent. Please verify your email to access full profile features!</p> 
+        <p><a href="Home.html" class="home-link">Go to Home Page</a></p>
+    </div>
+
+    <script>
+        // Get the profile data from local storage 
+        const profileData = JSON.parse(localStorage.getItem('profileData')); 
+
+        if (profileData) {
+            const userName = profileData.firstName; 
+            document.getElementById('greeting').textContent = "Hello, " + userName + "! We're glad to have you here.";
+        } else {
+            document.getElementById('greeting').textContent = "Welcome! We're glad to have you here.";
+        }
+    </script>
+</body>
+</html>
+<style>
+    .welcome-container {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .home-link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .home-link:hover {
+        background-color: #45a049;
+    }
+</style>
