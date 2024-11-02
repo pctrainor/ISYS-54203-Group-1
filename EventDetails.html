@@ -1,72 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Basic setup for the webpage -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Details</title>
-    <!-- Link to our CSS file for styling -->
-    <link rel="stylesheet" href="Style/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Details</title>
+  <link rel="stylesheet" href="Style/style.css">
+  <style>
+    /* Style for positioning Attendee Requirements button on the middle left */
+    .attendee-requirement-button {
+        position: fixed;
+        left: 10px; /* Position on the far left */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Align to middle of the page */
+    }
+
+    .attendee-requirement-button button {
+        background-color: #007bff; /* Blue color */
+        color: white;
+        padding: 15px 30px; /* Larger padding for a bigger button */
+        font-size: 18px; /* Increase font size for visibility */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for emphasis */
+        transition: background-color 0.3s ease;
+    }
+
+    .attendee-requirement-button button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+  </style>
 </head>
 <body>
-    <!-- Header section of the page -->
-    <header>
-        <!-- Main title of the event, will be filled in by JavaScript -->
-        <h1 id="event-title">Event Name</h1>
-        <p>Discover all the details about our exciting events!</p>
-    </header>
+  <header>
+    <h1 id="event-title">Event Name</h1>
+    <p>Discover all the details about our exciting events!</p>
+  </header>
 
-    <!-- Main content of the page -->
-    <div class="container">
-        <section id="event-details">
-            <h2>Event Details</h2>
-            <!-- Placeholders for event information, will be filled in by JavaScript -->
-            <p id="event-date"></p>
-            <p id="event-time"></p>
-            <p id="event-location"></p>
-            <p id="event-category"></p>
-            <p id="event-description"></p>
-            <!-- Button to share the event -->
-            <button id="share-button">Share Event</button>
-        </section>
-    </div>
+  <!-- Attendee Requirement button positioned on the middle left -->
+  <div class="attendee-requirement-button">
+    <button onclick="window.location.href='AttendeeRequirement.html'">Attendee Requirements</button>
+  </div>
 
-    <!-- Footer section of the page -->
-    <footer>
-        <p>&copy; 2023 Campus Event Calendar</p>
-    </footer>
+  <div class="container">
+    <section id="event-details">
+      <h2>Event Details</h2>
+      <p id="event-date"></p>
+      <p id="event-time"></p>
+      <p id="event-location"></p>
+      <p id="event-category"></p>
+      <p id="event-description"></p>
+      <button id="share-button">Share Event</button>
+    </section>
+  </div>
 
-    <!-- Link to our main JavaScript file -->
-    <script src="script.js"></script>
-    
-    <!-- JavaScript code specific to this page -->
-    <script>
-        // Wait for the page to fully load before running this code
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get the event title from the URL
-            const params = new URLSearchParams(window.location.search);
-            const eventTitle = params.get('title');
-            
-            // Find the event in our list of events (from script.js)
-            const event = events.find(e => e.title === eventTitle);
+  <footer>
+    <p>&copy; 2023 Campus Event Calendar</p>
+  </footer>
 
-            if (event) {
-                // If we found the event, update the page with its details
-                document.title = `${event.title} - Event Details`;
-                document.getElementById('event-title').textContent = event.title;
-                document.getElementById('event-date').textContent = `Date: ${event.date}`;
-                document.getElementById('event-time').textContent = `Time: ${event.time}`;
-                document.getElementById('event-location').textContent = `Location: ${event.location || 'TBA'}`;
-                document.getElementById('event-category').textContent = `Category: ${event.category}`;
-                document.getElementById('event-description').textContent = event.description;
+  <script src="script.js"></script>
+  
+  <script>
+    // Wait for the page to fully load before running this code
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the event title from the URL
+      const params = new URLSearchParams(window.location.search);
+      const eventTitle = params.get('title');
+      
+      // Find the event in our list of events (from script.js)
+      const event = events.find(e => e.title === eventTitle);
 
-                // Set up the share button to use the shareEvent function from script.js
-                document.getElementById('share-button').addEventListener('click', () => shareEvent(event));
-            } else {
-                // If we didn't find the event, show an error message
-                document.getElementById('event-details').innerHTML = '<p>Event not found.</p>';
-            }
-        });
-    </script>
+      if (event) {
+        // If we found the event, update the page with its details
+        document.title = `${event.title} - Event Details`;
+        document.getElementById('event-title').textContent = event.title;
+        document.getElementById('event-date').textContent = `Date: ${event.date}`;
+        document.getElementById('event-time').textContent = `Time: ${event.time}`;
+        document.getElementById('event-location').textContent = `Location: ${event.location || 'TBA'}`;
+        document.getElementById('event-category').textContent = `Category: ${event.category}`;
+        document.getElementById('event-description').textContent = event.description;
+
+        // Set up the share button to use the shareEvent function from script.js
+        document.getElementById('share-button').addEventListener('click', () => shareEvent(event));
+      } else {
+        // If we didn't find the event, show an error message
+        document.getElementById('event-details').innerHTML = '<p>Event not found.</p>';
+      }
+    });
+  </script>
 </body>
 </html>
