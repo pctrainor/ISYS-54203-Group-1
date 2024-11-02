@@ -184,6 +184,62 @@ footer {
     width: 100%; 
 }
 
+/* Search filters styling */
+.search-filters {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.filter-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.date-filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.date-filters span {
+    color: #666;
+}
+
+.secondary-button {
+    background-color: #666;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.secondary-button:hover {
+    background-color: #555;
+}
+
+.no-results {
+    color: #666;
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+}
+
+.results-count {
+    color: #9D2235;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Mobile responsiveness for search filters */
 @media (max-width: 768px) {
     #search input {
         width: 100%;
@@ -192,6 +248,20 @@ footer {
     
     .category {
         width: 45%;
+    }
+
+    .filter-controls {
+        grid-template-columns: 1fr;
+    }
+    
+    .date-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .date-filters span {
+        text-align: center;
+        margin: 5px 0;
     }
 }
 
@@ -213,13 +283,12 @@ footer {
     width: 100%;
 
 }
-
 .wrap button:hover {
     background-color: #660000;
 }
 
-  /* Styles for the "Add New Event" button */
-  .add-event-button {
+/* Styles for the "Add New Event" button */
+.add-event-button {
     background-color: #8B0000; /* Dark red background */
     color: white; /* White text */
     padding: 10px 20px; /* Adds space inside the button */
@@ -333,7 +402,6 @@ select {
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-size: 1em;
-
 }
 
 .wrap button:hover {

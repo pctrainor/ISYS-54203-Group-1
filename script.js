@@ -107,6 +107,63 @@ function shareEvent(event) {
         });
 }
 
+// Enhanced search function that combines all filters
+function filterEvents(searchText, category, dateFrom, dateTo, location) {
+    return events.filter(event => {
+        const matchesSearch = !searchText || 
+            event.title.toLowerCase().includes(searchText.toLowerCase()) ||
+            event.description.toLowerCase().includes(searchText.toLowerCase());
+
+        const matchesCategory = !category || 
+            event.category.toLowerCase() === category.toLowerCase();
+
+        const eventDate = new Date(event.date);
+        const fromDate = dateFrom ? new Date(dateFrom) : null;
+        const toDate = dateTo ? new Date(dateTo) : null;
+        
+        const matchesDateRange = (!fromDate || eventDate >= fromDate) && 
+                                (!toDate || eventDate <= toDate);
+
+        const matchesLocation = !location || 
+            (event.location && event.location.toLowerCase().includes(location.toLowerCase()));
+
+        return matchesSearch && matchesCategory && matchesDateRange && matchesLocation;
+    });
+}
+
+// Function to update search results in real-time
+function updateSearchResults() {
+    const searchText = document.getElementById('search-input').value;
+    const category = document.getElementById('category-filter').value;
+    const dateFrom = document.getElementById('date-from').value;
+    const dateTo = document.getElementById('date-to').value;
+    const location = document.getElementById('location-filter').value;
+
+    const filteredEvents = filterEvents(searchText, category, dateFrom, dateTo, location);
+    const resultsCount = document.getElementById('search-results-count');
+
+    if (filteredEvents.length === 0) {
+        resultsCount.textContent = 'No events found. Try adjusting your search filters.';
+        resultsCount.className = 'no-results';
+    } else {
+        resultsCount.textContent = `Found ${filteredEvents.length} event${filteredEvents.length === 1 ? '' : 's'}`;
+        resultsCount.className = 'results-count';
+    }
+
+    displayEvents(filteredEvents);
+}
+
+// Function to clear all filters
+function clearFilters() {
+    document.getElementById('search-input').value = '';
+    document.getElementById('category-filter').value = '';
+    document.getElementById('date-from').value = '';
+    document.getElementById('date-to').value = '';
+    document.getElementById('location-filter').value = '';
+    
+    updateSearchResults();
+}
+
 // This function searches for events based on user input
 function searchEvents(query) {
     query = query.toLowerCase(); // Make the query lowercase for comparison
@@ -209,7 +266,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         errorMessageElement.style.display = 'none'; // Hide error message
-
         // Add the new event to the events list
         events.push({
             title: eventName,
@@ -245,4 +301,24 @@ document.addEventListener('DOMContentLoaded', () => {
         // Log to console as a mock for sending a confirmation email
         console.log('Confirmation email sent to organizer.');
     });
+
+    // Set up search functionality
+    const searchInput = document.getElementById('search-input');
+    const categoryFilter = document.getElementById('category-filter');
+    const dateFromFilter = document.getElementById('date-from');
+    const dateToFilter = document.getElementById('date-to');
+    const locationFilter = document.getElementById('location-filter');
+    const clearFiltersButton = document.getElementById('clear-filters');
+
+    // Add event listeners for real-time updates
+    [searchInput, categoryFilter, dateFromFilter, dateToFilter, locationFilter].forEach(element => {
+        if (element) {
+            element.addEventListener('input', updateSearchResults);
+        }
+    });
+
+    // Clear filters button
+    if (clearFiltersButton) {
+        clearFiltersButton.addEventListener('click', clearFilters);
+    }
 });

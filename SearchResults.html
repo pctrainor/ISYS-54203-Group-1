@@ -43,11 +43,24 @@
         // This changes the title to show what the user searched for
         document.getElementById('search-title').textContent = `Search Results for "${searchQuery}"`;
 
-        // This part finds all the events that match what the user searched for
-        const searchResults = searchEvents(searchQuery);
-        
-        // This part puts all the matching events on the page for the user to see
-        displayEvents(searchResults);
+        // Add this to the script section in SearchResults.html
+        try {
+            // This part finds all the events that match what the user searched for
+            const searchResults = searchEvents(searchQuery);
+            
+            // This part puts all the matching events on the page for the user to see
+            displayEvents(searchResults);
+        } catch (error) {
+            console.error('Error fetching search results:', error);
+            document.getElementById('event-list').innerHTML = `
+                <div class="error-message">
+                    <p>Unable to fetch results, please try again later.</p>
+                    <button onclick="window.location.reload()" class="secondary-button">
+                        Try Again
+                    </button>
+                </div>
+            `;
+        }
     </script>
 </body>
 </html>
