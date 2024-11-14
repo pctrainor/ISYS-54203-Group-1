@@ -46,8 +46,6 @@
     </div>
 
     <script>
-        // registration.html
-
         document.getElementById('registrationForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -133,6 +131,39 @@
             .catch(error => {
                 console.error('Error:', error);
                 alert('An error occurred during registration.'); 
+            });
+        });
+
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = document.getElementById('email').value;
+
+            fetch('http://127.0.0.1:5000/validate_email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => {
+                if (response.status == 401) {
+                    alert('Please use a different email address. This one is taken.');
+                    document.getElementById('email').value = ''; // Clear the email field
+                    // REMOVE THIS LINE: document.getElementById('email').focus(); 
+                    throw new Error('Email already taken');
+                } else if (response.status == 402) {
+                    alert('Spam Email Detected (check powered by AI)');
+                    document.getElementById('email').value = ''; // Clear the email field
+                    // REMOVE THIS LINE: document.getElementById('email').focus(); 
+                    throw new Error('spam email');
+                }
+                return response.json();
+            })
+            .catch(error => {
+                if (error.message === 'Email already taken' || error.message === 'spam email') {
+                    return;
+                }
+                console.error('Error validating email:', error);
+                alert('An error occurred while validating the email address.');
             });
         });
     </script>
