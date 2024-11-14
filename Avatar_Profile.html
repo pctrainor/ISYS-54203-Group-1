@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Avatar Creation</title>
+    <style>
+        #avatar-preview {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <h2>Create Your Avatar</h2>
+    <input type="file" id="avatar-input">
+    <button onclick="uploadAvatar()">Upload Avatar</button>
+
+    <img id="avatar-preview" src="" alt="Avatar Preview">
+
+    <button id="useAvatar" disabled>Use Avatar</button>
+
+    <script>
+        const avatarInput = document.getElementById('avatar-input');
+        const avatarPreview = document.getElementById('avatar-preview');
+        const useAvatarButton = document.getElementById('useAvatar');
+        let avatarUrl = '';
+
+        function uploadAvatar() {
+            const file = avatarInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                avatarPreview.src = e.target.result;
+                avatarUrl = e.target.result; // Store the avatar URL
+
+                // Enable the "Use Avatar" button
+                useAvatarButton.disabled = false;
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        useAvatarButton.addEventListener('click', () => {
+            // Send the avatar URL to the main page or store it for later use
+            // For example, you could use session storage or local storage:
+            sessionStorage.setItem('avatarUrl', avatarUrl);
+
+            // Redirect to the main page
+            window.location.href = 'main_page.html';
+        });
+    </script>
+</body>
+</html>
