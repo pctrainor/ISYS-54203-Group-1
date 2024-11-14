@@ -76,8 +76,8 @@
             const submitButton = document.getElementById('submitButton');
             const errorMessageElement = document.getElementById('error-message');
             const weatherInfo = document.getElementById('weather-info');
-            const googleApiKey = 'AIzaSyDpi_VYEt0LfCA1M8xWfpteKgoaMO0JN38'; // Your Google API Key
-            const weatherApiKey = 'c90dc4beaaf34ee294514336241411'; // Your WeatherAPI.com API Key
+            const googleApiKey = 'Google got mad at me because this isnt secure'; // Your Google API Key
+            const weatherApiKey = 'Google got mad at me because this isnt secure'; // Your WeatherAPI.com API Key
 
             function isDateInFuture(dateString) {
                 const today = new Date();
@@ -133,7 +133,12 @@
                         <img src="${icon}" alt="${condition}">
                     `;
                 } catch (error) {
-                    weatherInfo.textContent = 'Weather data not available for this location and date.';
+                    weatherInfo.innerHTML = `
+                        <p><strong>Temperature:</strong> 20°C</p>
+                        <p><strong>Conditions:</strong> Partly Cloudy</p>
+                        <p><em>Note: This is example data as the weather service is currently unavailable.</em></p>
+                        <img src="https://cdn.weatherapi.com/weather/64x64/day/116.png" alt="Partly cloudy">
+                    `;
                     console.error('Error:', error);
                 }
             }
