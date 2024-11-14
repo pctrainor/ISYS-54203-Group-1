@@ -1,9 +1,9 @@
-import re
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
 import os
+import re
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///profiles.db'
@@ -28,6 +28,7 @@ class Profile(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
 
 @app.route('/profile', methods=['POST'])
 def create_profile():
@@ -73,11 +74,13 @@ def is_valid_password(password):
         return False
     return True
 
+
 @app.route('/logout', methods=['POST'])
 def logout():
     session.pop('user_id', None)
     session.pop('logged_in', None)
     return jsonify({'message': 'Logged out successfully'}), 200
+
 
 @app.route('/Home.html')
 def homepage():
@@ -97,6 +100,23 @@ def homepage():
 def index():
     return render_template('index.html')
 
+@app.route('/validate_email', methods=['POST'])
+def validate_email():
+    data = request.get_json()
+    email = data.get('email')
+
+    if not email:
+        return jsonify({'error': 'Missing email'}), 400
+
+    if Profile.query.filter_by(email=email).first():
+        return jsonify({'error': 'Email address already exists'}), 401
+
+    if any(keyword in email.lower() for keyword in ['spam', 'crypto', 'blockchain', 'bitcoin']):
+        return jsonify({'error': 'AI detected spam email'}), 402
+
+    # Simulate email validation
+    return jsonify({'message': 'Valid email address'}), 200
+    
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

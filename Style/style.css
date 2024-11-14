@@ -317,6 +317,17 @@ input[type="text"], input[type="date"], input[type="time"], textarea {
     box-sizing: border-box; /* Includes padding and border in element's total width and height */
 }
 
+/* Styles for form inputs */
+input[type="password"] {
+    width: 100%; /* Makes inputs full width */
+    padding: 12px; /* Adds space inside inputs */
+    margin: 10px 0; /* Adds space above and below inputs */
+    border: 2px solid #9D2235; /* Adds a Razorback red border */
+    border-radius: 4px; /* Rounds the corners */
+    box-sizing: border-box; /* Includes padding and border in element's total width and height */
+}
+
+
 /* Styles for the submit button */
 button[type="submit"] {
     background-color: #8B0000; /* Dark red background */
