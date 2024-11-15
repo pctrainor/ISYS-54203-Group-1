@@ -322,3 +322,27 @@ document.addEventListener('DOMContentLoaded', () => {
         clearFiltersButton.addEventListener('click', clearFilters);
     }
 });
+
+document.getElementById('ai-suggest-button').addEventListener('click', function() {
+    const eventDetails = {
+        title: document.getElementById('eventName').value,
+        description: document.getElementById('eventDescription').value,
+        category: document.getElementById('eventCategory').value
+    };
+
+    fetch('http://127.0.0.1:5000/suggest_event', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ event_details: eventDetails })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('ai-suggestions').innerHTML = `<p>${data.suggestions}</p>`;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while getting AI suggestions.');
+    });
+});
