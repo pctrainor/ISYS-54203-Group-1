@@ -21,19 +21,19 @@
                 <!-- Event Name Field -->
                 <label for="eventName">Event Name:</label><br>
                 <input type="text" id="eventName" name="eventName" placeholder="Enter event name" required><br>
-            
+
                 <!-- Event Date Field -->
                 <label for="eventDate">Event Date:</label><br>
                 <input type="date" id="eventDate" name="eventDate" required><br>
-            
+
                 <!-- Event Time Field -->
                 <label for="eventTime">Event Time:</label><br>
                 <input type="time" id="eventTime" name="eventTime" required><br>
-            
+
                 <!-- Event Location Field -->
                 <label for="eventLocation">Event Location:</label><br>
                 <input type="text" id="eventLocation" name="eventLocation" placeholder="Enter event location" required><br>
-            
+
                 <!-- Event Category Field -->
                 <label for="eventCategory">Event Category:</label><br>
                 <select id="eventCategory" name="eventCategory" required>
@@ -45,17 +45,26 @@
                     <option value="Social">Social</option>
                     <option value="Other">Other</option>
                 </select><br>
-            
+
                 <!-- Event Description Field -->
                 <label for="eventDescription">Event Description:</label><br>
                 <textarea id="eventDescription" name="eventDescription" placeholder="Enter event description" required></textarea><br>
-            
+
+                <button type="button" id="ai-suggest-button" class="major-button">Get AI Suggestions</button>
+                <div id="ai-suggestions"></div>
+
                 <!-- Submit Button -->
                 <button type="submit" id="submitButton" disabled>Submit</button>
-            
+
                 <!-- Error Message Display -->
                 <div id="error-message" class="error-message"></div>
             </form>
+
+            <!-- Weather Forecast Section -->
+            <div id="weather-forecast" class="weather-forecast">
+                <h3>Weather Forecast</h3>
+                <div id="weather-info"></div>
+            </div>
         </section>
     </div>
 
@@ -65,39 +74,93 @@
     </footer>
 
     <script>
-        // Remove any existing event listeners when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('eventCreationForm');
-            if (!form) return; // Exit if we're not on the event creation page
-
             const submitButton = document.getElementById('submitButton');
             const errorMessageElement = document.getElementById('error-message');
+            const weatherInfo = document.getElementById('weather-info');
+            const googleApiKey = 'Google got mad at me because this isnt secure'; // Your Google API Key
+            const weatherApiKey = 'Google got mad at me because this isnt secure'; // Your WeatherAPI.com API Key
 
-            // Function to validate date
             function isDateInFuture(dateString) {
                 const today = new Date();
-                today.setHours(0, 0, 0, 0); // Reset time part for date comparison
+                today.setHours(0, 0, 0, 0);
                 const inputDate = new Date(dateString);
                 return inputDate > today;
             }
 
-            // Enable/disable submit button and validate form
+            async function fetchWeather(location, date) {
+                if (!location || !date) {
+                    weatherInfo.textContent = 'Please enter a valid location and date.';
+                    return;
+                }
+
+                try {
+                    // Step 1: Get coordinates for the location using Google Maps Geocoding API
+                    const geoResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=${googleApiKey}`);
+                    const geoData = await geoResponse.json();
+
+                    console.log('Geocoding Response:', geoData);
+                    if (geoData.status !== 'OK' || geoData.results.length === 0) {
+                        throw new Error('No location found');
+                    }
+                    const { lat, lng } = geoData.results[0].geometry.location;
+
+                    // Step 2: Get weather forecast using WeatherAPI.com
+                    const weatherResponse = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${lat},${lng}&days=3`);
+                    const weatherData = await weatherResponse.json();
+                    console.log('Weather Response:', weatherData);
+
+                    if (!weatherResponse.ok || !weatherData.forecast) {
+                        throw new Error('Weather data not available');
+                    }
+
+                    const forecastDate = new Date(date);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    const dayDiff = Math.floor((forecastDate - today) / (1000 * 60 * 60 * 24));
+
+                    if (dayDiff < 0 || dayDiff >= weatherData.forecast.forecastday.length) {
+                        weatherInfo.textContent = 'Weather forecast not available for this date.';
+                        return;
+                    }
+
+                    const dailyForecast = weatherData.forecast.forecastday[dayDiff];
+                    const temp = dailyForecast.day.avgtemp_c;
+                    const condition = dailyForecast.day.condition.text;
+                    const icon = dailyForecast.day.condition.icon;
+
+                    weatherInfo.innerHTML = `
+                        <p><strong>Temperature:</strong> ${temp}°C</p>
+                        <p><strong>Conditions:</strong> ${condition}</p>
+                        <img src="${icon}" alt="${condition}">
+                    `;
+                } catch (error) {
+                    weatherInfo.innerHTML = `
+                        <p><strong>Temperature:</strong> 20°C</p>
+                        <p><strong>Conditions:</strong> Partly Cloudy</p>
+                        <p><em>Note: This is example data as the weather service is currently unavailable.</em></p>
+                        <img src="https://cdn.weatherapi.com/weather/64x64/day/116.png" alt="Partly cloudy">
+                    `;
+                    console.error('Error:', error);
+                }
+            }
+
             form.addEventListener('input', () => {
                 const eventDate = new Date(form.eventDate.value);
                 const isValid = form.checkValidity() && isDateInFuture(form.eventDate.value);
-                
+
                 submitButton.disabled = !isValid;
-                
+
                 if (isValid) {
                     errorMessageElement.style.display = 'none';
+                    fetchWeather(form.eventLocation.value.trim(), form.eventDate.value);
                 }
             });
 
-            // Handle form submission
             form.addEventListener('submit', (event) => {
                 event.preventDefault();
-                
-                // Get form values
+
                 const newEvent = {
                     title: form.eventName.value.trim(),
                     date: form.eventDate.value,
@@ -107,7 +170,6 @@
                     description: form.eventDescription.value.trim()
                 };
 
-                // Validate date again
                 if (!isDateInFuture(newEvent.date)) {
                     errorMessageElement.textContent = 'Event date must be in the future';
                     errorMessageElement.style.display = 'block';
@@ -115,14 +177,10 @@
                 }
 
                 try {
-                    // Add to events array
                     const events = JSON.parse(localStorage.getItem('events')) || [];
                     events.push(newEvent);
-                    
-                    // Save to localStorage
                     localStorage.setItem('events', JSON.stringify(events));
 
-                    // Show success message and summary
                     document.body.innerHTML = `
                         <div class="confirmation-page">
                             <h1>Event Created Successfully!</h1>
@@ -140,7 +198,7 @@
                     `;
 
                     console.log('Event created successfully:', newEvent);
-                    
+
                 } catch (error) {
                     errorMessageElement.textContent = 'Error creating event. Please try again.';
                     errorMessageElement.style.display = 'block';
