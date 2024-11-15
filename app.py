@@ -5,6 +5,8 @@ from flask_cors import CORS
 import os
 import re
 
+## AI API IMPORT SECTION
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///profiles.db'
 app.config['SECRET_KEY'] = os.urandom(24)  # Generate a strong secret key
