@@ -23,7 +23,34 @@ concurrency:
 
 jobs:
   # Add additional jobs here!!
+  grammar-check:
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install LanguageTool
+        run: |
+          pip install language-tool-python
+
+      - name: Run grammar check
+        run: |
+          mkdir -p grammar_reports
+          for file in $(find . -name "*.html"); do
+            python -m language_tool_python --language en-US "$file" > "grammar_reports/$(basename "$file").txt"
+          done
+
+      - name: Upload grammar reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: grammar-reports
+          path: grammar_reports/
   # End additional job steps!!
   # Single deploy job since we're just deploying
   deploy:
