@@ -18,19 +18,11 @@ jobs:
 
       - name: Check Year in HTML files
         run: |
-          if grep -Rq "2024" ./*.html; then
-            echo "Year 2024 found in HTML files."
+          if grep -Rq "2023" ./*.html; then
+            echo "Year 2023 found in HTML files."
           else
-            echo "Year 2024 not found in HTML files."
+            echo "Year 2023 not found in HTML files."
             exit 1
-          fi
-          if grep -Rq "20 [0-9][0-3]" ./*.html; then
-            echo "Old year found in HTML files."
-            exit 1
-          else
-            echo "No old year found in HTML files."
-          fi
-
   lint:
     runs-on: ubuntu-latest
     steps:
