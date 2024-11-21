@@ -29,6 +29,7 @@ jobs:
             exit 1
           else
             echo "No old year found in HTML files."
+          fi
 
   lint:
     runs-on: ubuntu-latest
