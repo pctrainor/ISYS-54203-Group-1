@@ -10,14 +10,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Add additional jobs here!!
-
-  # End additional job steps!!
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Add steps here!!
 
-      # End additional steps!!
+      # Step to install Lychee for link checking
+      - name: Install Lychee
+        run: |
+          curl -sSfL https://github.com/lycheeverse/lychee/releases/download/v0.12.0/lychee-v0.12.0-x86_64-unknown-linux-musl.tar.gz | tar xzf - -C /usr/local/bin
+
+      # Step to run broken link testing
+      - name: Run Broken Link Checker
+        run: lychee --verbose --recursive .
