@@ -23,4 +23,4 @@ jobs:
 
       # Step to run broken link testing
       - name: Run Broken Link Checker
-        run: lychee --verbose --recursive .
+        run: llychee --verbose .
