@@ -19,7 +19,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       # Add steps here!!
-      - name: Run stylelint
-        run: npx stylelint "**/*.css"
+      - name: Install dependencies
+        run: npm install --save-dev stylelint-config-standard && npm ci
 
+      - name: Run Stylelint
+        run: npx stylelint '**/*.{css,scss,less}
       # End additional steps!!
