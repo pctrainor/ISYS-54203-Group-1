@@ -23,5 +23,5 @@ jobs:
         run: npm install --save-dev stylelint-config-standard && npm ci
 
       - name: Run Stylelint
-        run: npx stylelint '**/*.{css,scss,less}
+        run: npx stylelint '**/*.{css,scss,less}'
       # End additional steps!!
