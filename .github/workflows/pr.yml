@@ -19,5 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       # Add steps here!!
+      - name: Run stylelint
+        run: npx stylelint "**/*.css"
 
       # End additional steps!!
