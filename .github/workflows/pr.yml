@@ -5,7 +5,6 @@ on:
   # Runs on pull requests to main branch
   pull_request:
     branches: ["main"]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -15,7 +14,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Check Year in HTML files
         run: |
           if grep -Rq "2023" ./*.html; then
@@ -23,15 +21,26 @@ jobs:
           else
             echo "Year 2023 not found in HTML files."
             exit 1
+          fi
+
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Add steps here!!
+      
+      # Step to install Lychee for link checking
+      - name: Install Lychee
+        run: |
+          curl -sSfL https://github.com/lycheeverse/lychee/releases/download/v0.12.0/lychee-v0.12.0-x86_64-unknown-linux-musl.tar.gz | tar xzf - -C /usr/local/bin
+      
+      # Step to run broken link testing
+      - name: Run Broken Link Checker
+        run: lychee --verbose .
+      
+      # Install and run Stylelint
       - name: Install dependencies
         run: npm install --save-dev stylelint-config-standard && npm ci
-
+      
       - name: Run Stylelint
         run: npx stylelint '**/*.{css,scss,less}'
-      # End additional steps!!
