@@ -10,9 +10,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Add additional jobs here!!
+  check_year:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  # End additional job steps!!
+      - name: Check Year in HTML files
+        run: |
+          if grep -Rq "2023" ./*.html; then
+            echo "Year 2023 found in HTML files."
+          else
+            echo "Year 2023 not found in HTML files."
+            exit 1
   lint:
     runs-on: ubuntu-latest
     steps:
