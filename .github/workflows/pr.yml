@@ -38,9 +38,18 @@ jobs:
       - name: Run Broken Link Checker
         run: lychee --verbose .
       
-      # Install and run Stylelint
+      # Install dependencies including htmlhint
       - name: Install dependencies
-        run: npm install --save-dev stylelint-config-standard && npm ci
+        run: |
+          npm install --save-dev stylelint-config-standard
+          npm install -g htmlhint
+          npm ci
       
+      # Run Stylelint
       - name: Run Stylelint
         run: npx stylelint '**/*.{css,scss,less}'
+
+      # Run HTMLHint
+      - name: Run HTMLHint
+        run: htmlhint "**/*.html"
+
