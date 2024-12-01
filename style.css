@@ -12,11 +12,7 @@ body {
   padding: 40px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  color: #333;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
 }
 
 .status {
@@ -44,12 +40,6 @@ h1 {
   margin-bottom: 10px;
 }
 
-.event {
-  font-size: 12px;
-}
-
-/* ... (previous CSS styles) ... */
-
 .create-profile-link {
   display: inline-block;
   padding: 12px 24px; /* Increased padding */
@@ -60,7 +50,7 @@ h1 {
   margin-bottom: 40px; /* Increased margin */
   transition: background-color 0.3s;
   border: none; /* Remove default button border */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%); /* Add a subtle shadow */
   font-weight: bold; /* Make the text bolder */
 }
 
@@ -78,7 +68,7 @@ h1 {
   margin-bottom: 40px; /* Increased margin */
   transition: background-color 0.3s;
   border: none; /* Remove default button border */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%); /* Add a subtle shadow */
   font-weight: bold; /* Make the text bolder */
 }
 
@@ -88,7 +78,7 @@ h1 {
 
 
 
-#Login CSS
+#login
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f4f4;
@@ -104,7 +94,7 @@ body {
   background-color: #fff;
   padding: 30px 40px;
   border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgb(0 0 0 / 10%);
   text-align: center;
 }
 
@@ -157,6 +147,7 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
 .error-message {
   color: red;        /* Red text for error messages */
   margin-top: 10px;  /* Space between the form and error message */
@@ -168,4 +159,5 @@ a:hover {
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
+  font-size: 12px;
 }
