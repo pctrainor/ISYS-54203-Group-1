@@ -1,0 +1,19 @@
+# Created a Dependabot that automatically checks for vulnerabilities in our dependencies
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run dependabot
+        uses: dependabot/dependabot-core@v2
+        with:
+          package-ecosystem: "npm"
+          directory: "/"
+          schedule-interval: "daily"
