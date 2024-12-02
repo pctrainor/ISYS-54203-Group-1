@@ -9,8 +9,8 @@
 body, html {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #000000;
-    background-color: #FFFFFF;
+    color: #000;
+    background-color: #FFF;
     height: 100%; 
 }
 
@@ -18,7 +18,7 @@ body, html {
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure body takes at least full viewport height */
+    min-height: 100vh;
 }
 
 .container, .main {
@@ -26,9 +26,9 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #FFFFFF;
+    background-color: #FFF;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
     text-align: center;
 }
 
@@ -53,13 +53,13 @@ a:hover {
 
 header {
     background-color: #9D2235;
-    color: white;
+    color: #FFF;
     text-align: center;
     padding: 20px;
 }
 
 header h1, header h2, header h3, header h4, header h5, header h6 {
-    color: white;
+    color: #FFF;
 }
 
 nav ul {
@@ -73,13 +73,13 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #FFFFFF;
+    color: #FFF;
     text-decoration: none;
 }
 
 /* Main content area */
 main {
-    flex: 1; /* Allow main content to grow and fill available space */
+    flex: 1;
     padding: 2rem;
     max-width: 800px;
     margin: 0 auto;
@@ -106,7 +106,7 @@ main {
 #search-button {
     padding: 10px 20px;
     background-color: #8B0000;
-    color: white;
+    color: #FFF;
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -114,7 +114,7 @@ main {
 }
 
 #search-button:hover {
-    background-color: #660000;
+    background-color: #600;
 }
 
 .events, .event-list {
@@ -128,7 +128,7 @@ main {
     background-color: #F8F8F8;
     padding: 15px;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -159,7 +159,7 @@ main {
 
 .category {
     text-decoration: none;
-    color: white;
+    color: #FFF;
     padding: 10px 20px;
     border-radius: 5px;
     min-width: 100px;
@@ -177,10 +177,9 @@ input[type="text2"], input[type="password2"] {
 /* Footer styles */
 footer {
     background-color: #9D2235;
-    color: white;
+    color: #FFF;
     text-align: center;
     padding: 10px;
-    /* Remove position: absolute */ 
     width: 100%; 
 }
 
@@ -191,7 +190,7 @@ footer {
     padding: 15px;
     background-color: #f8f8f8;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
 
 .filter-controls {
@@ -213,7 +212,7 @@ footer {
 
 .secondary-button {
     background-color: #666;
-    color: white;
+    color: #FFF;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -240,7 +239,7 @@ footer {
 }
 
 /* Mobile responsiveness for search filters */
-@media (max-width: 768px) {
+@media (width >= 768px) {
     #search input {
         width: 100%;
         margin-bottom: 10px;
@@ -265,7 +264,7 @@ footer {
     }
 }
 
-@media (max-width: 480px) {
+@media (width >= 480px) {
     .category {
         width: 100%;
     }
@@ -273,7 +272,7 @@ footer {
 
 .wrap button {
     background-color: #8B0000;
-    color: white;
+    color: #FFF;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -281,86 +280,86 @@ footer {
     font-size: 16px;
     transition: background-color 0.3s ease;
     width: 100%;
-
 }
+
 .wrap button:hover {
-    background-color: #660000;
+    background-color: #600;
 }
 
 /* Styles for the "Add New Event" button */
 .add-event-button {
-    background-color: #8B0000; /* Dark red background */
-    color: white; /* White text */
-    padding: 10px 20px; /* Adds space inside the button */
-    border: none; /* Removes the border */
-    border-radius: 5px; /* Rounds the corners */
-    cursor: pointer; /* Changes cursor to a hand on hover */
-    font-size: 16px; /* Sets text size */
-    transition: background-color 0.3s ease; /* Smooth color transition on hover */
-    display: inline-block; /* Aligns button inline with text */
-    margin: 20px 0; /* Adds vertical spacing */
+    background-color: #8B0000;
+    color: #FFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin: 20px 0;
 }
 
 /* Changes color when hovering over the "Add New Event" button */
 .add-event-button:hover {
-    background-color: #A52A2A; /* Lighter red on hover */
+    background-color: #A52A2A;
 }
 
 /* Styles for form inputs */
 input[type="text"], input[type="date"], input[type="time"], textarea {
-    width: 100%; /* Makes inputs full width */
-    padding: 12px; /* Adds space inside inputs */
-    margin: 10px 0; /* Adds space above and below inputs */
-    border: 2px solid #9D2235; /* Adds a Razorback red border */
-    border-radius: 4px; /* Rounds the corners */
-    font-size: 16px; /* Sets text size */
-    box-sizing: border-box; /* Includes padding and border in element's total width and height */
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #9D2235;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
 /* Styles for form inputs */
 input[type="password"] {
-    width: 100%; /* Makes inputs full width */
-    padding: 12px; /* Adds space inside inputs */
-    margin: 10px 0; /* Adds space above and below inputs */
-    border: 2px solid #9D2235; /* Adds a Razorback red border */
-    border-radius: 4px; /* Rounds the corners */
-    box-sizing: border-box; /* Includes padding and border in element's total width and height */
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #9D2235;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 /* Styles for the major buttons */
 .major-button {
-    background-color: #8B0000; /* Dark red background */
-    color: white; /* White text */
-    padding: 10px 20px; /* Adds space inside the button */
-    border: none; /* Removes the border */
-    border-radius: 5px; /* Rounds the corners */
-    cursor: pointer; /* Changes cursor to a hand on hover */
-    font-size: 16px; /* Sets text size */
-    transition: background-color 0.3s ease; /* Smooth color transition on hover */
-    display: inline-block; /* Aligns button inline with text */
-    margin: 20px 0; /* Adds vertical spacing */
+    background-color: #8B0000;
+    color: #FFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin: 20px 0;
 }
 
 /* Changes color when hovering over the major button */
 .major-button:hover {
-    background-color: #A52A2A; /* Lighter red on hover */
+    background-color: #A52A2A;
 }
 
 /* Styles for the submit button */
 button[type="submit"] {
-    background-color: #8B0000; /* Dark red background */
-    color: white; /* White text */
-    padding: 10px 20px; /* Adds space inside the button */
-    border: none; /* Removes the border */
-    border-radius: 5px; /* Rounds the corners */
-    cursor: pointer; /* Changes cursor to a hand on hover */
-    font-size: 16px; /* Sets text size */
-    transition: background-color 0.3s ease; /* Smooth color transition on hover */
+    background-color: #8B0000;
+    color: #FFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 /* Changes color when hovering over the submit button */
 button[type="submit"]:hover {
-    background-color: #A52A2A; /* Lighter red on hover */
+    background-color: #A52A2A;
 }
 
 .error-message {
@@ -377,9 +376,9 @@ button[type="submit"]:hover {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #FFF;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
 
 .event-summary {
@@ -390,22 +389,23 @@ button[type="submit"]:hover {
 }
 
 .confirmation-page button {
-    background-color: #8B0000; /* Dark red background */
-    color: white; /* White text */
-    padding: 10px 20px; /* Adds space inside the button */
-    border: none; /* Removes the border */
-    border-radius: 5px; /* Rounds the corners */
-    cursor: pointer; /* Changes cursor to a hand on hover */
-    font-size: 16px; /* Sets text size */
-    transition: background-color 0.3s ease; /* Smooth color transition on hover */
-    margin-top: 20px; /* Adds space above the button */
-    width: 200px; /* Set a fixed width */
+    background-color: #8B0000;
+    color: #FFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    width: 200px;
 }
 
 .confirmation-page button:hover {
-    background-color: #A52A2A; /* Lighter red on hover */
+    background-color: #A52A2A;
 }
 
+/* Combined select styles */
 select {
     width: 100%;
     padding: 12px;
@@ -413,26 +413,16 @@ select {
     border: 2px solid #9D2235;
     border-radius: 4px;
     font-size: 16px;
-    background-color: white;
+    background-color: #FFF;
     cursor: pointer;
-}
-
-select:focus {
-    outline: none;
-    border-color: #8B0000;
-}
-
-/* Style for the dropdown arrow */
-select {
     appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239D2235' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-size: 1em;
 }
 
-.wrap button:hover {
-    background-color: #660000;
+select:focus {
+    outline: none;
+    border-color: #8B0000;
 }
