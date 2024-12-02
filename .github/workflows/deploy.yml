@@ -40,6 +40,15 @@ jobs:
       - name: Run HTMLHint
         run: htmlhint "**/*.html"
 
+              # Step to install Lychee for link checking
+      - name: Install Lychee
+        run: |
+          curl -sSfL https://github.com/lycheeverse/lychee/releases/download/v0.12.0/lychee-v0.12.0-x86_64-unknown-linux-musl.tar.gz | tar xzf - -C /usr/local/bin
+      
+      # Step to run broken link testing
+      - name: Run Broken Link Checker
+        run: lychee --verbose .
+
   # Single deploy job since we're just deploying
   deploy:
     needs: lint  # Make sure lint job passes before deploying

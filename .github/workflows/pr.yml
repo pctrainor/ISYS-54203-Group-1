@@ -22,12 +22,6 @@ jobs:
             echo "Year 2023 not found in HTML files."
             exit 1
           fi
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
       
       # Step to install Lychee for link checking
       - name: Install Lychee
