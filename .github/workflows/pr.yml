@@ -36,24 +36,18 @@ jobs:
       
       # Step to run broken link testing
       - name: Run Broken Link Checker
-        run: lychee --verbose .
+        run: lychee --verbose  .
       
-        # Install and run Stylelint
-        - name: Install dependencies
-          run: npm install --save-dev stylelint-config-standard && npm ci
+      # Install and run Stylelint
+      - name: Install dependencies
+        run: npm install --save-dev stylelint-config-standard && npm ci
         
-        - name: Run Stylelint
-          run: npx stylelint '**/*.{css,scss,less}'
+      - name: Run Stylelint
+        run: npx stylelint '**/*.{css,scss,less}'
   
       # Installation steps included to run an npm Audit
-    security:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm ci
         
-        - name: Install dependencies
-          run: npm ci
-        
-        - name: Run npm audit
-          run: npm audit --audit-level=high
+      - name: Run npm audit
+        run: npm audit --audit-level=high
