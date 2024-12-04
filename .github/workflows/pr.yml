@@ -64,4 +64,4 @@ jobs:
           chmod +x dependency-check/bin/dependency-check.sh 
 
       - name: Run OWASP Dependency-Check
-        run: dependency-check/bin/dependency-check.sh --project "My Project" --scan . --format "ALL"
+        run: dependency-check/bin/dependency-check.sh --project "ISYS-54203-Group-1" --scan . --format "ALL"
