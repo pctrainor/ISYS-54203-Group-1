@@ -57,11 +57,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install OWASP Dependency-Check
-        run: |
-          curl -sSfL https://github.com/jeremylong/DependencyCheck/releases/download/v6.5.3/dependency-check-6.5.3-release.zip -o dependency-check.zip
-          unzip dependency-check.zip -d dependency-check
-          chmod +x dependency-check/bin/dependency-check.sh 
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Run OWASP Dependency-Check
-        run: dependency-check/bin/dependency-check.sh --project "ISYS-54203-Group-1" --scan . --format "ALL"
+      - name: Run npm audit
+        run: npm audit --audit-level=high
