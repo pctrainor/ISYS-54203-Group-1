@@ -39,6 +39,15 @@ jobs:
       - name: Run HTMLHint
         run: htmlhint "**/*.html"
 
+      # Run Spell Check Lint
+      - name: Spell Check
+        uses: check-spelling/check-spelling@v0.0.22
+        with:
+          config: .github/actions/spell-check-config
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
   # Security scanning
   security:
     runs-on: ubuntu-latest

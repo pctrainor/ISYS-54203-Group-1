@@ -40,6 +40,14 @@ jobs:
       - name: Run HTMLHint
         run: htmlhint "**/*.html"
 
+          # Step 5: Run Spell Check
+      - name: Spell Check
+        uses: check-spelling/check-spelling@v0.0.22
+        with:
+          config: .github/actions/spell-check-config
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
               # Step to install Lychee for link checking
       - name: Install Lychee
         run: |
