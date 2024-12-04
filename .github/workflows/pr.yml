@@ -39,14 +39,13 @@ jobs:
       - name: Run HTMLHint
         run: htmlhint "**/*.html"
 
-      # Security scanning
-      - name: Checkout
-        uses: actions/checkout@v4
+  # Security scanning
   security:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Install Trivy
         run: |
           sudo apt-get install wget apt-transport-https gnupg lsb-release
