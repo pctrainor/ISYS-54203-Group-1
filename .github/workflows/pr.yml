@@ -1,44 +1,32 @@
-# Simple workflow for PRs in GitHub
 name: GitHub Actions PR Workflow
 
 on:
-  # Runs on pull requests to main branch
   pull_request:
     branches: ["main"]
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  lint:
+  lint-css: # Job for CSS linting
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      # Step to install Lychee for link checking
-      - name: Install Lychee
-        run: |
-          curl -sSfL https://github.com/lycheeverse/lychee/releases/download/v0.12.0/lychee-v0.12.0-x86_64-unknown-linux-musl.tar.gz | tar xzf - -C /usr/local/bin
-
-      # Step to run broken link testing
-      - name: Run Broken Link Checker
-        run: lychee --verbose .
-
-      # Install dependencies including htmlhint
       - name: Install dependencies
-        run: |
-          npm install --save-dev stylelint-config-standard
-          npm install -g htmlhint
-          npm ci
-
-      # Run Stylelint
+        run: npm install --save-dev stylelint-config-standard
       - name: Run Stylelint
         run: npx stylelint '**/*.{css,scss,less}'
 
-      # Run HTMLHint
+  lint-html: # Job for HTML linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install -g htmlhint
       - name: Run HTMLHint
         run: htmlhint "**/*.html"
 
+SpellCheck
       # Run Spell Check Lint
       - name: Spell Check
         uses: check-spelling/check-spelling@v0.0.22
@@ -50,11 +38,24 @@ jobs:
 
   # Security scanning
   security:
+
+  check-links: # Job for link checking
+main
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install Lychee
+        run: |
+          curl -sSfL https://github.com/lycheeverse/lychee/releases/download/v0.12.0/lychee-v0.12.0-x86_64-unknown-linux-musl.tar.gz | tar xzf - -C /usr/local/bin
+      - name: Run Broken Link Checker
+        run: lychee --verbose .
 
+  security-scan: # Job for security scanning
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Install Trivy
         run: |
           sudo apt-get install wget apt-transport-https gnupg lsb-release
@@ -62,6 +63,5 @@ jobs:
           echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
           sudo apt-get update
           sudo apt-get install trivy
-
       - name: Run Trivy
         run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
