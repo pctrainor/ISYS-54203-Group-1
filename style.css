@@ -12,7 +12,7 @@ body {
   padding: 40px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
 }
 
 h1 {
@@ -48,20 +48,18 @@ h1 {
   font-size: 12px;
 }
 
-/* ... (previous CSS styles) ... */
-
 .create-profile-link {
   display: inline-block;
-  padding: 12px 24px; /* Increased padding */
+  padding: 12px 24px;
   background-color: #007bff;
   color: #fff;
   text-decoration: none;
-  border-radius: 8px; /* More rounded corners */
-  margin-bottom: 40px; /* Increased margin */
+  border-radius: 8px;
+  margin-bottom: 40px;
   transition: background-color 0.3s;
-  border: none; /* Remove default button border */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  font-weight: bold; /* Make the text bolder */
+  border: none;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  font-weight: bold;
 }
 
 .create-profile-link:hover {
@@ -70,26 +68,24 @@ h1 {
 
 .login-user {
   display: inline-block;
-  padding: 12px 24px; /* Increased padding */
+  padding: 12px 24px;
   background-color: #007bff;
   color: #fff;
   text-decoration: none;
-  border-radius: 8px; /* More rounded corners */
-  margin-bottom: 40px; /* Increased margin */
+  border-radius: 8px;
+  margin-bottom: 40px;
   transition: background-color 0.3s;
-  border: none; /* Remove default button border */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  font-weight: bold; /* Make the text bolder */
+  border: none;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  font-weight: bold;
 }
 
 .login-user:hover {
   background-color: #0069d9;
 }
 
-
-
-#Login CSS
-body {
+/* Login styles */
+#login {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f4f4;
   margin: 0;
@@ -104,13 +100,8 @@ body {
   background-color: #fff;
   padding: 30px 40px;
   border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgb(0 0 0 / 10%);
   text-align: center;
-}
-
-h1 {
-  color: #333;
-  margin-bottom: 20px;
 }
 
 input[type="text2"], 
@@ -157,14 +148,15 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
 .error-message {
-  color: red;        /* Red text for error messages */
-  margin-top: 10px;  /* Space between the form and error message */
-  display: none;     /* Hidden by default */
+  color: red;
+  margin-top: 10px;
+  display: none;
 }
 
 /* Basic styling for the events sharing */
-.event {
+.event-sharing {
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
