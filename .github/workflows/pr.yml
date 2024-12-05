@@ -1,10 +1,10 @@
 name: GitHub Actions PR Workflow
-
+ 
 on:
   pull_request:
     branches: ["main"]
   workflow_dispatch:
-
+ 
 jobs:
   lint-css: # Job for CSS linting
     runs-on: ubuntu-latest
@@ -15,7 +15,7 @@ jobs:
         run: npm install --save-dev stylelint-config-standard
       - name: Run Stylelint
         run: npx stylelint '**/*.{css,scss,less}'
-
+ 
   lint-html: # Job for HTML linting
     runs-on: ubuntu-latest
     steps:
@@ -25,7 +25,7 @@ jobs:
         run: npm install -g htmlhint
       - name: Run HTMLHint
         run: htmlhint "**/*.html"
-
+ 
   check-links: # Job for link checking
     runs-on: ubuntu-latest
     steps:
