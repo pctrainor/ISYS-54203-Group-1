@@ -51,3 +51,11 @@ jobs:
           sudo apt-get install trivy
       - name: Run Trivy
         run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+
+  # Job for spell checking
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install codespell
+        run: sudo apt-get install -y codespell
+      - name: Run codespell
+        run: codespell "**/*.{js,jsx,ts,tsx,md,html,css,scss,less}"
