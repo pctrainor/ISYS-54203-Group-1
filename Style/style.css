@@ -9,8 +9,8 @@
 body, html {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #333333;  /* Darker for better contrast */
-    background-color: #FFF;
+    color: #333;
+    background-color: #fff;
     height: 100%; 
 }
 
@@ -26,24 +26,24 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #FFF;
+    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
     text-align: center;
 }
 
 h1, h2, h3 {
-    color: #8B0000;  /* Darker red for better contrast */
+    color: #8b0000;
     margin-bottom: 10px;
 }
 
 p {
     margin-top: 20px;
-    font-size: 16px;  /* Increased for better readability */
+    font-size: 16px;
 }
 
 a {
-    color: #8B0000;  /* Darker red for better contrast */
+    color: #8b0000;
     text-decoration: none;
 }
 
@@ -52,14 +52,14 @@ a:hover {
 }
 
 header {
-    background-color: #8B0000;  /* Darker red for better contrast */
-    color: #FFF;
+    background-color: #8b0000;
+    color: #fff;
     text-align: center;
     padding: 20px;
 }
 
 header h1, header h2, header h3, header h4, header h5, header h6 {
-    color: #FFF;
+    color: #fff;
 }
 
 nav ul {
@@ -73,7 +73,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #FFF;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -91,7 +91,7 @@ main {
     display: flex;
     max-width: 600px;
     margin: 20px auto;
-    border: 2px solid #8B0000;
+    border: 2px solid #8b0000;
     border-radius: 5px;
     overflow: hidden;
 }
@@ -105,8 +105,8 @@ main {
 
 #search-button {
     padding: 10px 20px;
-    background-color: #8B0000;
-    color: #FFF;
+    background-color: #8b0000;
+    color: #fff;
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -127,7 +127,7 @@ main {
 }
 
 .event, .event-card {
-    background-color: #F8F8F8;
+    background-color: #f8f8f8;
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
@@ -142,14 +142,14 @@ main {
 .event-date {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #8B0000;
+    color: #8b0000;
     margin-bottom: 0.5rem;
 }
 
 .event-details {
     display: inline-block;
     margin-top: 10px;
-    color: #8B0000;
+    color: #8b0000;
 }
 
 /* Category styles with better contrast */
@@ -171,30 +171,30 @@ main {
 }
 
 .music-category {
-    background-color: #8B0000;
-    color: #FFFFFF;
+    background-color: #8b0000;
+    color: #fff;
 }
 
 .arts-category {
-    background-color: #00008B;
-    color: #FFFFFF;
+    background-color: #00008b;
+    color: #fff;
 }
 
 .sports-category {
     background-color: #006400;
-    color: #FFFFFF;
+    color: #fff;
 }
 
 .academic-category {
-    background-color: #4B0082;
-    color: #FFFFFF;
+    background-color: #4b0082;
+    color: #fff;
 }
 
 .category p {
     margin: 0;
     font-size: 16px;
     font-weight: bold;
-    color: #FFFFFF;
+    color: #fff;
 }
 
 .category:hover {
@@ -205,8 +205,8 @@ main {
 .home-link {
     display: inline-block;
     padding: 12px 24px;
-    background-color: #005A9C;
-    color: #FFFFFF;
+    background-color: #005a9c;
+    color: #fff;
     text-decoration: none;
     border-radius: 8px;
     margin-top: 20px;
@@ -222,8 +222,8 @@ main {
 
 /* Footer styles */
 footer {
-    background-color: #8B0000;
-    color: #FFF;
+    background-color: #8b0000;
+    color: #fff;
     text-align: center;
     padding: 10px;
     width: 100%;
@@ -231,8 +231,8 @@ footer {
 
 /* Add to calendar button styles */
 .add-to-calendar-button {
-    background-color: #005A9C;
-    color: #FFFFFF;
+    background-color: #005a9c;
+    color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -250,14 +250,14 @@ footer {
 
 /* Focus styles for accessibility */
 :focus {
-    outline: 3px solid #005A9C;
+    outline: 3px solid #005a9c;
     outline-offset: 2px;
 }
 
 .category:focus,
 .home-link:focus,
 .add-to-calendar-button:focus {
-    outline: 3px solid #FFFFFF;
+    outline: 3px solid #fff;
     outline-offset: 2px;
 }
 
@@ -284,18 +284,18 @@ select {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
-    border: 2px solid #8B0000;
+    border: 2px solid #8b0000;
     border-radius: 4px;
     font-size: 16px;
-    color: #333333;
+    color: #333;
 }
 
 /* Button styles with better contrast */
 button,
 .submit-button,
 .major-button {
-    background-color: #005A9C;
-    color: #FFFFFF;
+    background-color: #005a9c;
+    color: #fff;
     padding: 12px 24px;
     border: none;
     border-radius: 5px;
@@ -312,14 +312,35 @@ button:hover,
     background-color: #004479;
 }
 
-/* Error message with better contrast */
-.error-message {
-    color: #D32F2F;
-    background-color: #FFEBEE;
-    border: 1px solid #FFCDD2;
-    border-radius: 4px;
-    padding: 10px;
-    margin: 10px 0;
+/* Error message styles with improved contrast */
+.error-message-container {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.error-text {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.retry-button {
+    background-color: #005a9c;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    min-height: 44px;
+    min-width: 44px;
+}
+
+.retry-button:hover {
+    background-color: #004479;
 }
 
 /* Media queries for responsive design */
@@ -337,6 +358,7 @@ button:hover,
     }
 }
 
+/* Welcome page styles */
 .welcome-container {
     text-align: center;
     margin-top: 50px;
@@ -350,8 +372,8 @@ button:hover,
     display: inline-block;
     margin-top: 20px;
     padding: 12px 24px;
-    background-color: #258829; /* Darker green for better contrast */
-    color: #FFFFFF;
+    background-color: #258829;
+    color: #fff;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
@@ -361,11 +383,11 @@ button:hover,
 }
 
 .welcome-home-link:hover {
-    background-color: #1a6b1e; /* Even darker for hover state */
+    background-color: #1a6b1e;
     text-decoration: none;
 }
 
 .welcome-home-link:focus {
-    outline: 3px solid #005A9C;
+    outline: 3px solid #005a9c;
     outline-offset: 2px;
 }
