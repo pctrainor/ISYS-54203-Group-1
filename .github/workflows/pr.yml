@@ -37,6 +37,17 @@ jobs:
       - name: Run Broken Link Checker
         run: lychee --verbose .
 
+  spell-checker: # Job for spell checking
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install cspell
+        run: |
+          npm install -g cspell
+      - name: Run cspell
+        run: cspell "**/*.{js,jsx,ts,tsx,md,html,css,scss,less}"
+
   security-scan: # Job for security scanning
     runs-on: ubuntu-latest
     steps:
