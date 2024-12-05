@@ -63,29 +63,21 @@ jobs:
       - name: Run Trivy
         run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
         
-  accessibility-test: # Job for accessibility testing
+  accessibility-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+     
       - name: Install Pa11y
         run: npm install -g pa11y
-      - name: Run Pa11y
-        run: pa11y "**/*.html"accessibility-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
-      - name: Install Pa11y
-        run: npm install -g pa11y
-      
+     
       # Add step to find HTML files
       - name: Find HTML files
         id: find-html
         run: |
           echo "html_files=$(find . -name '*.html' -type f | tr '\n' ' ')" >> $GITHUB_OUTPUT
-
+ 
       # Run Pa11y with file:// protocol
       - name: Run Pa11y
         run: |
