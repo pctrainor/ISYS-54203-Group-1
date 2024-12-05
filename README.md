@@ -6,7 +6,7 @@ https://pctrainor.github.io/ISYS-54203-Group-1/
 
 # GitHub Actions Workflow for Code Quality and Security
 
-This repository uses GitHub Actions to automate code quality checks and security scanning on every pull request to the `main` branch.
+This repository uses GitHub Actions to automate code quality checks and security scanning on every pull request to the `main` branch!
 
 ## Workflow Details
 
