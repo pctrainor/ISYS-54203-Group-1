@@ -426,3 +426,7 @@ select:focus {
     outline: none;
     border-color: #8B0000;
 }
+
+.home-link {
+    background-color: #258829; 
+  }
