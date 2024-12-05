@@ -9,10 +9,12 @@
     <title>Home - Campus Event Calendar</title>
     <!-- Link to an external CSS file for styling the webpage -->
     <link rel="stylesheet" href="Style/style.css">
+    <!-- Description for search engines and accessibility -->
+    <meta name="description" content="Campus Event Calendar - Find and manage campus events">
 </head>
 <body>
     <!-- The header section of the webpage -->
-    <header>
+    <header role="banner">
         <!-- Main heading of the webpage -->
         <h1>Campus Event Calendar</h1>
         <!-- A brief description or tagline for the webpage -->
@@ -20,67 +22,109 @@
     </header>
     
     <!-- Main content area of the webpage -->
-    <main class="container">
+    <main role="main" class="container">
         <!-- Button to add a new event -->
-        <section id="add-event">
-            <button onclick="window.location.href='EventCreation.html'" class="add-event-button">Add New Event</button>
+        <section id="add-event" aria-labelledby="add-event-heading">
+            <h2 id="add-event-heading" class="visually-hidden">Add New Event</h2>
+            <button 
+                onclick="window.location.href='EventCreation.html'" 
+                class="add-event-button"
+                aria-label="Create a new event">
+                Add New Event
+            </button>
         </section>
 
-        <!-- This section contains the search bar -->
-        <section id="search">
-            <!-- Form that allows users to search for events, sending the query to SearchResults.html -->
-            <form action="SearchResults.html" method="get">
-                <!-- Container for the search input and button -->
+        <!-- Search section -->
+        <section id="search" aria-labelledby="search-heading">
+            <h2 id="search-heading" class="visually-hidden">Search Events</h2>
+            <form action="SearchResults.html" method="get" role="search">
                 <div class="search-container">
-                    <!-- Text input for users to type their search query -->
-                    <input type="text" id="search-input" name="query" placeholder="Search for events..." aria-label="Search">
-                    <!-- Button to submit the search form -->
-                    <button id="search-button">Search</button>
+                    <label for="search-input" class="visually-hidden">Search for events</label>
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        name="query" 
+                        placeholder="Search for events..." 
+                        aria-label="Search for events">
+                    <button 
+                        type="submit" 
+                        id="search-button" 
+                        aria-label="Submit search">
+                        Search
+                    </button>
                 </div>
             </form>
         </section>
         
-        <!-- This section will display upcoming events -->
-        <section id="upcoming-events">
-            <!-- Heading for the upcoming events section -->
-            <h2>Upcoming Events</h2>
+        <!-- Upcoming events section -->
+        <section id="upcoming-events" aria-labelledby="upcoming-events-heading">
+            <h2 id="upcoming-events-heading">Upcoming Events</h2>
             <!-- Placeholder for event cards that will be added by JavaScript -->
-            <div class="event-list" id="event-list"></div>
+            <div class="event-list" id="event-list" role="list">
+                <!-- Event cards will be dynamically inserted here -->
+            </div>
         </section>
 
-        <!-- This section shows popular event categories -->
-        <section id="popular-categories">
-            <!-- Heading for the popular categories section -->
-            <h2>Popular Event Categories</h2>
-            <!-- Container for category links -->
-            <div class="categories">
-                <!-- Link to the Music category page with a background color -->
-                <a href="EventsByCategory.html?category=Music" class="category" style="background-color: #f0a;">
+        <!-- Popular categories section -->
+        <section id="popular-categories" aria-labelledby="categories-heading">
+            <h2 id="categories-heading">Popular Event Categories</h2>
+            <div class="categories" role="navigation" aria-label="Event categories">
+                <a href="EventsByCategory.html?category=Music" 
+                   class="category music-category" 
+                   aria-label="Browse Music events">
                     <p>Music</p>
                 </a>
-                <!-- Link to the Arts category page with a background color -->
-                <a href="EventsByCategory.html?category=Arts" class="category" style="background-color: #0af;">
+                <a href="EventsByCategory.html?category=Arts" 
+                   class="category arts-category" 
+                   aria-label="Browse Arts events">
                     <p>Arts</p>
                 </a>
-                <!-- Link to the Sports category page with a background color -->
-                <a href="EventsByCategory.html?category=Sports" class="category" style="background-color: #fa0;">
+                <a href="EventsByCategory.html?category=Sports" 
+                   class="category sports-category" 
+                   aria-label="Browse Sports events">
                     <p>Sports</p>
                 </a>
-                <!-- Link to the Academic category page with a background color -->
-                <a href="EventsByCategory.html?category=Academic" class="category" style="background-color: #0f0;">
+                <a href="EventsByCategory.html?category=Academic" 
+                   class="category academic-category" 
+                   aria-label="Browse Academic events">
                     <p>Academic</p>
                 </a>
-                <a href="Home.html" class="home-link">Go to Home Page</a>
             </div>
+            <!-- Navigation link -->
+            <nav class="home-navigation" role="navigation">
+                <a href="Home.html" 
+                   class="home-link" 
+                   aria-label="Return to Home Page"
+                   role="button">
+                    Go to Home Page
+                </a>
+            </nav>
         </section>
     </main>
     
     <!-- Footer section of the webpage -->
-    <footer>
+    <footer role="contentinfo">
         <!-- Copyright notice -->
-        <p>&copy; 2023 Campus Event Calendar</p>
+        <p>&copy; <span id="copyright-year">2024</span> Campus Event Calendar. All rights reserved.</p>
     </footer>
+
+    <!-- Add template for event cards -->
+    <template id="event-card-template">
+        <div class="event-card" role="listitem">
+            <h3></h3>
+            <p class="event-date"></p>
+            <p class="event-time"></p>
+            <p class="event-category"></p>
+            <p class="event-description"></p>
+            <button class="add-to-calendar-button">Add to Calendar</button>
+        </div>
+    </template>
     
+    <!-- JavaScript for dynamic content and interactions -->
     <script src="script.js"></script>
+    <!-- Script to update copyright year -->
+    <script>
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
