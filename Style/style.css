@@ -428,5 +428,5 @@ select:focus {
 }
 
 .home-link {
-    background-color: #258829; 
+    background-color: #006400; /* Darker green for better contrast */
   }
