@@ -4,66 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Creation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        select, textarea, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        button:hover {
-            background-color: #0062cc;
-        }
-    </style>
+    <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
     <header>
@@ -71,24 +12,33 @@
     </header>
 
     <div class="container">
-        <form>
-            <label for="attendee-requirements">Attendee Requirements (Organizers Only):</label>
-            <select id="attendee-requirements">
-                <option value="open-to-all">Open to All</option>
-                <option value="students-only">Students Only</option>
-                <option value="faculty-only">Faculty Only</option>
-                <option value="students-and-faculty">Students and Faculty</option>
-                <option value="other">Other (specify below)</option>
-            </select>
+        <form id="attendee-form" action="registration.html" method="get">
+            <div class="form-group">
+                <label for="attendee-requirements">Attendee Requirements (Organizers Only):</label>
+                <select id="attendee-requirements" name="attendee-requirements" aria-label="Select attendee requirements">
+                    <option value="open-to-all">Open to All</option>
+                    <option value="students-only">Students Only</option>
+                    <option value="faculty-only">Faculty Only</option>
+                    <option value="students-and-faculty">Students and Faculty</option>
+                    <option value="other">Other (specify below)</option>
+                </select>
+            </div>
 
-            <textarea id="other-requirements" placeholder="Specify other requirements"></textarea>
+            <div class="form-group">
+                <label for="other-requirements">Additional Requirements:</label>
+                <textarea 
+                    id="other-requirements" 
+                    name="other-requirements"
+                    aria-label="Specify additional requirements"
+                    placeholder="Specify other requirements"></textarea>
+            </div>
 
-            <button type="button" onclick="window.location.href='registration.html'" class="button">Event Details</button>
+            <div class="button-group">
+                <button type="submit" class="submit-button" aria-label="Submit and proceed to event details">
+                    Event Details
+                </button>
+            </div>
         </form>
     </div>
-
-    <script>
-        // ... (your JavaScript code)
-    </script>
 </body>
 </html>

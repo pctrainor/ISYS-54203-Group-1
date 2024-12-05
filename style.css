@@ -161,3 +161,28 @@ a:hover {
   padding: 10px;
   margin-bottom: 10px;
 }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Ensure focus indicators are visible */
+:focus {
+  outline: 3px solid #0056b3;
+  outline-offset: 2px;
+}
+
+/* Ensure interactive elements are clearly interactive */
+[role="button"],
+button,
+a {
+  cursor: pointer;
+}
