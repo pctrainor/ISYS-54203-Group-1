@@ -1,10 +1,10 @@
 name: GitHub Actions PR Workflow
-
+ 
 on:
   pull_request:
     branches: ["main"]
   workflow_dispatch:
-
+ 
 jobs:
   lint-css: # Job for CSS linting
     runs-on: ubuntu-latest
@@ -15,7 +15,7 @@ jobs:
         run: npm install --save-dev stylelint-config-standard
       - name: Run Stylelint
         run: npx stylelint '**/*.{css,scss,less}'
-
+ 
   lint-html: # Job for HTML linting
     runs-on: ubuntu-latest
     steps:
@@ -25,7 +25,7 @@ jobs:
         run: npm install -g htmlhint
       - name: Run HTMLHint
         run: htmlhint "**/*.html"
-
+ 
   check-links: # Job for link checking
     runs-on: ubuntu-latest
     steps:
@@ -36,7 +36,18 @@ jobs:
           curl -sSfL https://github.com/lycheeverse/lychee/releases/download/v0.12.0/lychee-v0.12.0-x86_64-unknown-linux-musl.tar.gz | tar xzf - -C /usr/local/bin
       - name: Run Broken Link Checker
         run: lychee --verbose .
-
+ 
+  spell-checker: # Job for spell checking
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install cspell
+        run: |
+          npm install -g cspell
+      - name: Run cspell
+        run: cspell "**/*.{js,jsx,ts,tsx,md,html,css,scss,less}"
+ 
   security-scan: # Job for security scanning
     runs-on: ubuntu-latest
     steps:
