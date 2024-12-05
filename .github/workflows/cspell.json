@@ -1,0 +1,27 @@
+{
+    "version": "0.2",
+    "words": [
+      "sightlines",
+      "forecastday",
+      "avgtemp",
+      "Hackathon",
+      "UARK",
+      "Prefs",
+      "VCALENDAR",
+      "PRODID",
+      "VEVENT",
+      "yourdomain",
+      "DTSTAMP",
+      "DTSTART",
+      "DTEND",
+      "uark",
+      "csvg",
+      "cpolyline",
+      "polyline",
+      "ISYS" 
+    ],
+    "ignorePaths": [
+      "node_modules/**", 
+      "dist/**" 
+    ]
+  }
