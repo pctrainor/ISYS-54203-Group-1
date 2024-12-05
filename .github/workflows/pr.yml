@@ -51,3 +51,13 @@ jobs:
           sudo apt-get install trivy
       - name: Run Trivy
         run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+        
+  accessibility-test: # Job for accessibility testing
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+        - name: Install Pa11y
+          run: npm install -g pa11y
+        - name: Run Pa11y
+          run: pa11y "**/*.html"
