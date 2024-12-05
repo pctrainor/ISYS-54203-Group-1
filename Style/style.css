@@ -344,7 +344,7 @@ button:hover,
 }
 
 /* Media queries for responsive design */
-@media (max-width: 768px) {
+@media screen and (width <= 768px) {
     .category {
         width: 100%;
     }
