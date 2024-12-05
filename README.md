@@ -33,7 +33,8 @@ The workflow consists of four separate jobs that run in parallel:
 - **Early Issue Detection:** Identifies potential errors and vulnerabilities before they reach production.
 - **Improved Security:** Helps protect the project from security threats.
 - **Streamlined Workflow:** Automates tedious tasks, freeing up developers to focus on more important work.
-
+- **Improved Communication:** Automates spell checking to ensure clear and professional communication in code comments, documentation, and commit messages, reducing misunderstandings and enhancing collaboration
+  
 ## Contributing
 
 If you'd like to contribute to this workflow, please feel free to submit a pull request. We welcome any improvements or suggestions!
