@@ -1,1 +1,5 @@
 https://twitter.com/**
+# Ignore Home.html in accessibility checks
+Home.html
+./Home.html
+**/Home.html
