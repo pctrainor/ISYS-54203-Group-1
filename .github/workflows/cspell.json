@@ -18,7 +18,8 @@
       "csvg",
       "cpolyline",
       "polyline",
-      "ISYS" 
+      "ISYS",
+      "isnt" 
     ],
     "ignorePaths": [
       "node_modules/**", 
