@@ -19,7 +19,8 @@
       "cpolyline",
       "polyline",
       "ISYS",
-      "isnt" 
+      "isnt",
+      "aint"  
     ],
     "ignorePaths": [
       "node_modules/**", 

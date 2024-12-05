@@ -426,3 +426,11 @@ select:focus {
     outline: none;
     border-color: #8B0000;
 }
+
+.home-link {
+    background-color: #258829; /* Darker green for better contrast */
+  }
+
+#home-link {
+background-color: #258829; /* Darker green for better contrast */
+}
