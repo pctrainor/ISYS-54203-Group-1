@@ -434,3 +434,35 @@ select:focus {
 #home-link {
 background-color: #258829; /* Darker green for better contrast */
 }
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Submit button with improved contrast */
+.submit-button {
+    background-color: #0072ed; /* Changed for better contrast ratio */
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.submit-button:focus {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+}
+
+/* Button group styling */
+.button-group {
+    margin-top: 20px;
+    text-align: center;
+}
